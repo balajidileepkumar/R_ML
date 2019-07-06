@@ -4,18 +4,22 @@
 #Matrices
 #data.frame
 #Factors
+#Arrays
+
 #Vectors
 #Vectors are datasctructure that contain similar type of data
 vector_numerical = c(6,7,8)
 #typeof operator is used determine the type of the object
 typeof(vector_numerical) # [1] "double"
 length(vector_numerical) # [1] 3
-
+#Here C is called as the categorical/combinational operator which does the 
+#work of Combining multiple types to one single type based on their 
+#precedence
 vector_logical = c(TRUE,FALSE,FALSE)
 typeof(vector_logical) # Result [1] "logical"
 vector_strings = c("aa","bb","cc")
 typeof(vector_strings) # Result [1] "character"
-vector_complex = c(1+2i, 2+3i,3+4i)
+vector_complex = c(1+2i, 2+3i,3+4i,12)
 typeof(vector_complex) # Result  [1] "complex"
 
 #Combining Vectors
@@ -27,6 +31,7 @@ o = c(m,n)
 Q= c("aa","bb","cc")
 P= c(1,2,3)
 R  = c(Q,P)
+typeof(R)
 #Result [1] "aa" "bb" "cc" "1"  "2"  "3"
 
 
@@ -91,8 +96,13 @@ b <- c(TRUE,TRUE,0)
 #lets change data for e and f
 e <- c(FALSE, FALSE,0)
 f <- c(FALSE, FALSE,0)
+x|y
 x||y
+
+a|b
 a||b
+
+e|f
 e||f
 
 
@@ -106,16 +116,21 @@ a3 = c(2,1, TRUE, 2+3i)
 
 c(2,1, TRUE, 2+3i) -> a4
 
+c(2,1, TRUE, 2+3i) ->> a5
+
 a1
 a2
 a3
 a4
+a5
 
 #Indexing Vectors
 a <- c(1,2,3,4,5,6,6,7,7,8,9)
 a[0] # Result numeric(0) # indexing starts from 1, unlike other programming languages where it starts from on hence
 #numeric(0) would be the result
+a[1]
 a[3] #Result [1] 3
+a[8]
 a[1:3] #Result [1] 1 2 3 # Between Start Index and End Index
 a[3:7]  # Result [1] 3 4 5 6 6 # Value Between Two Sequences
 a[-9]
@@ -142,7 +157,7 @@ names(languages) = c("Best", "Very Best", "Good", "Mediocre")
 #lets print the data for languages vector now
 languages # Result     Best    Very Best         Good     Mediocre
 # "Python" "R Language"       "Java"         "C#"
-
+languages["Good"]
 #We can also retrieve the element using it's name
 languages["Very Best"] #Result Very Best
 "R Language"
