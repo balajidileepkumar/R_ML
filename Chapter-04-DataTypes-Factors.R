@@ -12,10 +12,10 @@ class(myfactor)
 nlevels(myfactor)
 
 #another example
-directions_vector = c("NOrth","South","East", "West","Northeast","")
+directions_vector = c("NOrth","South","East", "West","Northeast","Northwest")
 is.factor(directions_vector)
 
-mydirectionalfactor =factor(x = directions_vector,c("South","East"), labels = c("PrimaryDirection","Secondary"))
+mydirectionalfactor =factor(x = directions_vector, labels = c("PrimaryDirection"))
 mydirectionalfactor =factor(x = directions_vector,c("South","East"))
 levels(mydirectionalfactor)
 class(mydirectionalfactor)
@@ -27,7 +27,7 @@ nlevels(mydirectionalfactor)
 class(mydirectionalfactor)
 
 nlevels(mydirectionalfactor)
-
+mydirectionalfactor =factor(x = directions_vector, labels = c("N","S","E","N","NE","NW"))
 #Setting up the levels
 
 
