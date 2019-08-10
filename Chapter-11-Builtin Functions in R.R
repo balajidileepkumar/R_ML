@@ -15,6 +15,8 @@ floor(x)
 floor(y)
 #Trunc
 print(trunc(x))
+print(trunc(y))
+
 #sqrt 
 x = 2
 sqrt(x)
@@ -24,18 +26,23 @@ round(x,2)
 round(x,3)
 round(x,4)
 round(x,5)
+x = -1.451789
 #signif 
 signif(x,2)
 signif(x,3)
+signif(x,4)
+
 #cos, sin , tan 
 a = 0 
 sin(a)
 cos(a)
 tan(a)
 #log , log10x , exp
-b =1
+b =1112
 log(b)
+log2(b)
 log10(b)
+
 exp(b)
 ################################
 #Character Functions
@@ -50,16 +57,32 @@ print(x)
 #grep(pattern,x, ignore.case = FALSE,fixed = FALSE)
 
 pattern ="[0-9]"
-x1 = c("dac","a2bc","b5ca")
+x1 =c("1dac","a2bc","b5ca")
 y1 = grep(pattern,x1, ignore.case = TRUE, fixed = FALSE)
 print(y1)
+x2 = "helloworld4123"
+y2 = grep(pattern,x2, ignore.case = TRUE, fixed = FALSE)
+print(y2)
+
 ##################################
 #sub#
-pattern = "studio"
+pattern = "[a-z]+"
 y ="Welcome 2 R studio"
-z = sub(pattern, "Language", y, ignore.case = FALSE, fixed = TRUE)
-pattern = "\\d"
-z1 = sub(pattern, "to", z, ignore.case = FALSE, fixed = FALSE)
+z = sub(pattern, "Language", y, ignore.case = FALSE, fixed = FALSE)
+y1 =c("dac","a2bc","b5ca")
+z1 = sub(pattern, "Language", y1, ignore.case = FALSE, fixed = FALSE)
+
+y2 = c("Dac","a2bc","b5ca")
+pattern = "[a-z]+"
+z2 = sub(pattern, "to", y2, ignore.case = FALSE, fixed = FALSE)
+
+y3 = c("Dac","a2bc","b5ca")
+pattern = "Dac"
+z3 = sub(pattern, "to", y3, ignore.case = FALSE, fixed = TRUE)
+#fixed = TRUE -> Disable Regex
+#fixed = FALSE -> Enable Regex
+#ignore.case = TRUE -> ignore the case sensitivity
+#ignore.case = False -> consider the different cases separtely
 ####################################################################
 #paste
 a = paste("x",1:3,sep ="-")
@@ -72,12 +95,15 @@ c = paste("x","Hello", "world",2:4, sep ="_")
 a = "inDia"
 e = tolower(a)
 f = toupper(a)
-g = casefold(a, upper = FALSE)
+g = casefold(a, c = FALSE)
 ####################################################################
 library("stringr")
+x = "hello welcome to python 2 real world"
 b = str_to_upper(a)
 c = str_to_lower(b)
 d = str_to_title(c)
+d1 = str_to_title(x)
+
 ####################################################################
 
 

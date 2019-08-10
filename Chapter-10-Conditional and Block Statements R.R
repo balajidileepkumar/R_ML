@@ -17,7 +17,7 @@ if(a >b)
 #Swtich
 ###################
 #a = switch(expression, case1,case2,case3,.....casen)
-a = switch(3, "case1","case2","case3")
+a = switch(1, FALSE,"case2","case3")
 print(a)
 a>b
 b = switch(a>b, TRUE,FALSE)
@@ -26,14 +26,14 @@ selector = "color"
 c = switch(selector,"color"="red", "number"=1, "logical"=TRUE)
 print(c)
 
-Invite = "Welcome"
+Invite = "Hello"
 switch(Invite, Hello = {
-  print("Hello to besant")
-  print("Hello to R Lang")
+  print("Hello to besant1")
+  print("Hello to R Lang1")
 },
 Welcome  = {
-  print("Welcome to besant")
-  print("Welcome to R Lang")
+  print("Welcome to besant2")
+  print("Welcome to R Lang2")
 })
 ##################
 #For statement

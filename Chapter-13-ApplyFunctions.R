@@ -12,27 +12,49 @@
 #Applies a Function to a Matrix
 data <- matrix(c(1:10,1:30), nrow = 5, ncol = 4,byrow = FALSE)
 print(data)
+#apply(x,Margin(dimension, function))
 result = apply(data,1,mean)
 print(result)
-result_all = apply(data,c(2),mean)
+result_all = apply(data,2,mean)
+print(result_all)
+result_all = apply(data,c(1,2),mean)
 print(result_all)
 
 #lapply
 #takes a list as an input and performs the calculation
 data <-list(x=1:15, y= 6:20, z =20:35)
+print(data)
 median_list = lapply(data, median)
-mean_list =lapply(data, FUN=mean)
+
+median_list = lapply(data, median)
+
+#result_mean_list = mean_list =lapply(data, FUN=mean, simplify = TRUE)
+#typeof(result_mean_list)
+
+#mean_list =lapply(data, FUN=mean)
 
 data_a <- matrix(c(1:10), nrow = 3, ncol = 3,byrow = FALSE)
 data_b <- matrix(c(11:20), nrow = 3, ncol = 3,byrow = FALSE)
 data_c <- matrix(c(21:30), nrow = 3, ncol = 3,byrow = FALSE)
 
 mylist <- list(data_a,data_b,data_c)
-lapply(mylist,"[",4)
-lapply(mylist,"[",2)
-lapply(mylist,"[",1,2)
-lapply(mylist,"[",3,)
+#lapply(data,function,itemno)#select the particular item
+#lapply(data,function,c(itemno1,itemno2.....) #select the value at given row and column
+#lapply(data,function,rowno,)#select the particular row
+#lapply(data,function,rowno,columnno) #select the value at given row and column
+#lapply(data,function,c(rownos),columnno) #all the valeus at given rows in rowvector and the given column
+#lapply(data,function,c(rownos),c(columnnos) #all the valeus at given rows in rowvector and the given column
 
+
+a= lapply(mylist,"[",c(4,3))
+b= lapply(mylist,"[",2)
+c =lapply(mylist,"[",1,2)
+d =lapply(mylist,"[",4)
+e = lapply(mylist,"[",3,)
+f = lapply(mylist,"[",,2)
+g = lapply(mylist,"[",,c(2,1))
+h = lapply(mylist,"[",1:2,2:3)
+mylist
 
 #sapply 
 #returns vector instead of a list
@@ -84,15 +106,3 @@ vapply_result = vapply(1:5,sqrt,1.0)
 vapply_result = vapply(1:5,sqrt,TRUE)
 vapply_result
 
-#Data Analysis
-
-#Data Manipulation
-#right_join, left_join,semi_join,anti_join,
-
-#Data Cleansing
-#Filter, Aggregate, Select, Group_by, Arrange, mutate
-
-#Dat Visualization
-#ggplot, geom_points, geom_line
-
-df_primary <- tibble(ID=1:10,~y,)

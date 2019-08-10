@@ -32,9 +32,9 @@ IrisPlot <-ggplot(iris, aes(x=Petal.Length, y=Petal.Width))   +  geom_point() + 
 
 plot(IrisPlot)
 
-IrisPlot <- IrisPlot + coord_cartesian(xlim=c(2.0, 7.0), ylim=c(0.5, 3.5))  # zooms in   # set se=FALSE to turnoff confidence bands
+IrisPlot <- IrisPlot + coord_cartesian(xlim=c(2.0, 7.0), ylim=c(2.5, 3.5))  # zooms in   # set se=FALSE to turnoff confidence bands
 
-IrisPlot <- IrisPlot + coord_cartesian(xlim=c(2.0, 7.0), ylim=c(0.5, 3.5))  # zooms in   # set se=FALSE to turnoff confidence bands
+IrisPlot <- IrisPlot + coord_cartesian(xlim=c(2.0, 7.0), ylim=c(2.5, 3.5))  # zooms in   # set se=FALSE to turnoff confidence bands
 
 plot(IrisPlot)
 ################

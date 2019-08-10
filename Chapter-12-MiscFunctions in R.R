@@ -1,15 +1,18 @@
 ###
 #seq function # generates sequence
-seq(c(1,2,3))
-seq(2,10)
-r = seq(from =20, to = 100, by =10)
-print(r)
+a_seq = seq(c(1,2,4))
+#
+b_seq = seq(2,10)
+seq_jump = seq(from =20, to = 100, by =10)
+print(seq_jump)
 #rep function
 repeatedvalues_times = rep(c(1,2,3),times = 5)
 print(repeatedvalues_times)
 repeatedvalues_each = rep(c(1,2,3),each = 5)
 print(repeatedvalues_each)
 repeatedvalues_nat_seq = rep(1:8,each = 2)
+print(repeatedvalues_nat_seq)
+repeatedvalues_nat_seq = rep(1:8,times = 2)
 print(repeatedvalues_nat_seq)
 repeatedvalues_fun_seq_each = rep(seq(5,15,by=3),each = 3)
 print(repeatedvalues_fun_seq_each)

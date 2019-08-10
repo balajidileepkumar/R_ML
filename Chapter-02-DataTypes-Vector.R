@@ -160,6 +160,9 @@ a[c(-1,-2,-4,-5)]
 a[c(-1,-4,-5)] #Result [1] 6 6 7 7 8 9  # Selecting Particular values with input vector containg indexe to be selected
 #Logical Indexing
 Vector_bool = c(TRUE, FALSE, TRUE , TRUE, FALSE)
+typeof(Vector_bool)
+#``````````````````````````````````````````````````````````````````````````````````````````````````
+
 Vector_any = c("JOHN", "MIKE", "PETE", "WeSCHE","SEBASTIN")
 Vector_any[Vector_bool] #Result [1] "JOHN"   "PETE"   "WeSCHE"
 #Here Only True Values for Vector is Selected.

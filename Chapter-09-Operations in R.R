@@ -110,14 +110,16 @@ print(matrix_1)
 print(t(matrix_1))
 resultant_matrix = matrix_1%*%t(matrix_1)
 print(resultant_matrix)
-resultant_matrix = matrix_1%/%t(matrix_1)
+resultant_matrix = matrix_1%/%((matrix_1))
 print(resultant_matrix)
 
 #pipeline operator
 #used to pipeline output of one function or method to another pipeline.
 
 "%>%" <- function(x,f) do.call(f,list(x))
+
 pi %>% sin
+
 sin(pi)
 cos(sin(pi))
 tan(cos(sin(pi)))
@@ -126,7 +128,7 @@ tan(1)
 cos(sin(0))
 tan(cos(sin(0)))
 
-#0 %>% sin %>% cos %>% tan
+0 %>% sin %>% cos %>% tan
 #deg 0 30 45 60 90
 #sin 0 1/2 1/root2 root3/2 1
 #cos 1 root3/2 1/root2 1/2 0
@@ -140,11 +142,11 @@ tan(cos(sin(0)))
 library(magrittr)
 names(iris) <- c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", "Species")
 
-iris %>%  subset(Petal.Length > 1) %>% aggregate(. ~ Species, ., mean)
+iris %>%  subset(iris$Petal.Length > 1) %>% aggregate(. ~ Species, ., mean)
 mtcars
 iris
-iris %>%  subset(Petal.Length > 1)
-
+iris %>%  subset(iris,iris$Petal.Length > 1)
+iris$Petal.Length
 
 
 ####################
@@ -155,10 +157,13 @@ names(iris_1) <- c( "Petal.Length", "Petal.Width","Sepal.Length", "Sepal.Width",
 iris_1
 iris_1$Petal.Length
 
+attach(iris)
 a = subset(Sepal.Length > 1)
 subset(iris_1, Sepal.Length >1)
+
 x = subset(iris_1, Petal.Length >6)
 y= aggregate(. ~ Species, ., mean)
+
 print(x)
 iris_1 %>%  subset(Petal.Length >6)
 
