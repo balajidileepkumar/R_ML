@@ -6,7 +6,7 @@
 #right_join, left_join,semi_join,anti_join,
 
 #Data Cleansing
-#Filter, Aggregate, Select, Group_by, Arrange, mutate
+#Filter, Aggregate, Select, Group_by, Arrange, mutate,gather spread
 
 #Data Visualization
 #ggplot, geom_points, geom_line
@@ -84,7 +84,27 @@ select(iris,Petal.Length,Species) %>% arrange(.,desc(Petal.Length))
 
 ##Mutate
 # adds new column based on any calculation
-mutate(iris,
+New_Iris = mutate(iris,
        length_difference = Petal.Length - Sepal.Length,
        width_difference = Petal.Width - Sepal.Width,
 )
+
+library(tidyverse)
+library(dplyr)
+
+summarise(mtcars, delay = mean(dep_delay, na.rm = TRUE))
+
+bySpecs <- group_by(mtcars, gear, drat, hp)
+
+Flower <- group_by(iris, Petal.Length, Sepal.Length,Petal.Width)
+
+Flower <- summarise(iris, mean=(5))
+
+
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+Flower
+
+#aggregate
+aggregate(Flower,Sepal.Length, mean)
+ag <- aggregate(Sepal.Length, data = iris, mean)
+xtabs(len ~ ., data = ag)
