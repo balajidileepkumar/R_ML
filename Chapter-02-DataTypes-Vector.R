@@ -1,4 +1,11 @@
 #Data Types in R
+#Primary
+ #character
+ #double
+ #complex
+ #logical
+
+#Secondary
 #Vectors
 #Lists
 #Matrices
@@ -8,7 +15,7 @@
 
 #Vectors
 #Vectors are datasctructure that contain similar type of data
-vector_numerical = c(6,7,8)
+vector_numerical = c(6,7,8+2i)
 #typeof operator is used determine the type of the object
 typeof(vector_numerical) # [1] "double"
 length(vector_numerical) # [1] 3
@@ -26,6 +33,7 @@ typeof(vector_complex) # Result  [1] "complex"
 m =c(6,7,8,9)
 n =c(1,2,3,4,5)
 o = c(m,n)
+
 # Result [1] 6 7 8 9 1 2 3 4 5
 #combining different type of vectors
 Q= c("aa","bb","cc")
@@ -38,7 +46,7 @@ Q= c("aa","bb","cc")
 P= c(1,2,3)
 R  = c(Q,P)
 typeof(R)
-R  = c(O,Q,P)
+R  = c(O,P)
 typeof(R)
 
 
@@ -104,13 +112,16 @@ e&&f # Result [1] FALSE
 
 #Lets go for Logical OR operation on the above variables now
 #Atleast one element is true in bitwise OR operation
+
 x <- c(3,0,TRUE,2+2i)
 y <- c(1,3,TRUE,2+3i)
+
 a <- c(FALSE, FALSE,1)
 b <- c(TRUE,TRUE,0)
+
 #lets change data for e and f
 e <- c(FALSE, FALSE,0)
-f <- c(FALSE, FALSE,0)
+f <- c(TRUE, FALSE,0)
 
 x|y
 x||y
@@ -187,3 +198,5 @@ languages["Very Best"] #Result Very Best
 "R Language"
 languages[c("Best","Very Best")]
 #Some Example
+
+

@@ -53,3 +53,7 @@ class(comp_1)
 log_1 = TRUE
 class(log_1)
 #[1] "logical"
+a = 1
+typeof(a)
+b = as.integer(a)
+typeof(b)

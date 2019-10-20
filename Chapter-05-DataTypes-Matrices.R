@@ -1,4 +1,4 @@
-#
+#ALLOWS ONE TYPE OF TWO DIMENSIONAL DATASTRUCTURE
 A_matrix= matrix(c(1,2,3,4,5,6,7,8,9), nrow = 3, ncol =3, byrow =TRUE)
 #Given Lesser Values the values start repeating for the matrix
 #Given Higher Values the values are discarded beyond the matrix range
@@ -49,7 +49,7 @@ print(Row_Indexable_Matrix[1,])
 #Get the First Row And First COlumn Element
 print(Row_Indexable_Matrix[1,1])
 #Get the Second Element
-print(Row_Indexable_Matrix[2])
+print(Row_Indexable_Matrix[8])
 #Get the Second Row
 print(Row_Indexable_Matrix[2,])
 #Get sequence of Rows from 1 to 2

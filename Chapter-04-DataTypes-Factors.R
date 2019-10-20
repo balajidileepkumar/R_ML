@@ -14,6 +14,7 @@ nlevels(myfactor)
 #another example
 directions_vector = c("NOrth","South","East", "West","Northeast","Northwest")
 is.factor(directions_vector)
+is.vector(directions_vector)
 
 mydirectionalfactor =factor(x = directions_vector, labels = c("PrimaryDirection"))
 mydirectionalfactor =factor(x = directions_vector,c("South","East"))
