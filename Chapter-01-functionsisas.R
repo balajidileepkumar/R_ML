@@ -1,9 +1,8 @@
-
-
 #This version of R 3.6 is called as feather spray
 #Variables in R
 a = 3
 typeof(a)
+as.integer(a)
 b <- 2.0 
 typeof(b)
 a + b -> c
@@ -15,17 +14,34 @@ typeof(e)
 #is - used to check the type of the object
 #as -  used to convert the object to different type.
 
-c<-123.123
+c<-128.123
 typeof(c)
+c+1
+
+cc <- as.integer(c)
+typeof(cc)
 
 d<- as.character(c)
 typeof(d)
+
+e <- as.integer(c)
+e
 
 is.character(c)# [1] FALSE
 
 is.numeric(c) # [1] TRUE
 
 is.character(d)# [1] TRUE
+
+is.character(e)#
+
+is.integer(e)#TRUE
+
+is.numeric(e)#TRUE
+e<-1
+as.logical(e)
+e<-0
+as.logical(e)
 
 #install any library
 install.packages("nutshell")
@@ -56,8 +72,9 @@ typeof(d)
 class(d)
 
 #rm(x) used to remove the data from the memory
-
-rm(d)
+a
+rm(a)
 typeof(d)
 class(d)
 
+ls()

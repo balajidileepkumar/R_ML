@@ -1,10 +1,26 @@
-###
-#seq function # generates sequence
-a_seq = seq(c(1,2,4))
-#
+
+#From 
+a_seq = seq(10)
+#From, To
 b_seq = seq(2,10)
+#By -  Step 
+b_seq = seq(2,10,3)
+b_seq = seq(2,10,7)
 seq_jump = seq(from =20, to = 100, by =10)
+#Length.Out - No of Values Required
+b_seq = seq(2,10,length.out = 5)
+seq_jump = seq(from =20, to = 100, length.out = 10)
 print(seq_jump)
+#along.with
+a_seq =  seq(along.with = 20)
+a_seq =  seq(along.with = list(1,2,3+4i,TRUE, "Hello World"))
+a_seq = seq(c(1,2,1))
+a_seq = seq(c(1,2,1))
+a_seq = seq(c(10001,2,5,20))
+###
+#length.out
+a_seq = seq(length.out = 20)
+
 #rep function
 repeatedvalues_times = rep(c(1,2,3),times = 5)
 print(repeatedvalues_times)

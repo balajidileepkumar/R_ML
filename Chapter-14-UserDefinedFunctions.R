@@ -17,7 +17,7 @@ kelvin_celsius <- function(temp_kelvin){
   temp_celcius <- (temp_kelvin -273.15)
   temp_celcius
 }
-kelvin_celsius(320)
+kelvin_celsius(273.15)
 ###
 farent_celsius = function(temp_farent){
   kelvin_celsius(farentheit_kelvin(temp_farent))
@@ -31,6 +31,7 @@ Increment_x<-function(input1, input2 =5){
   output
 }
 Increment_x(input_1)
+Increment_x()
 ### alternatively a return keyword can also be used for returning data in a function
 Increment_x<-function(input1, input2 =5){
   output <-input1 + input2

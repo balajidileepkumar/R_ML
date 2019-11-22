@@ -6,8 +6,9 @@ B_matrix = matrix(c(1,0,0,0,1,0,0,0,1), nrow = 3 , ncol = 3 , byrow = FALSE)
 C_matrix= matrix(c(1,2,3,4,5,6,7,8), nrow = 2, ncol =4, byrow =TRUE)
 C1_matrix= matrix(c(1+2i,2+3i,3+4i,4+5i,5+6i,6+7i,7+8i,8+9i), nrow = 2, ncol =4, byrow =TRUE)
 D_matrix = matrix(c(1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0), nrow = 4 , ncol = 2 , byrow = FALSE)
-E_matrix = matrix(c(1.0,2.0,3.0,4.0,5.0,6.0,7.0), nrow = 4 , ncol = 2 , byrow = FALSE)
+E_matrix = matrix(c(1.0,2+3i,3.0,4.0,5.0,6.0,7.0,9.0), nrow = 4 , ncol = 2 , byrow = FALSE)
 
+typeof(E_matrix)
 
 print(A_matrix)
 print(B_matrix)
@@ -27,7 +28,7 @@ print(H_matrix)
 t(A_matrix)#To Get the transpose of a matrix
 t(B_matrix)
 #dim is used to find the dimensions of a matrix
-dim(C_matrix)
+dim(A_matrix)
 dim(C1_matrix)
 #Rbind and Cbind Operations on Matrix
 RowBindC_Matrix = rbind(C_matrix,C1_matrix)
@@ -44,6 +45,8 @@ Row_Indexable_Matrix= matrix(c(1,2,3,4,5,6,7,8,9), nrow = 3, ncol =3, byrow =TRU
 print(Row_Indexable_Matrix)
 #Get the First Element
 print(Row_Indexable_Matrix[1])
+print(Row_Indexable_Matrix[2])
+
 #Get the First Row
 print(Row_Indexable_Matrix[1,])
 #Get the First Row And First COlumn Element
@@ -115,3 +118,6 @@ print(Colors_Additive_matrix["row3", "col1"])
 #Error while sequencing
 print(Colors_Additive_matrix[c("row1" : "row2"), "col1"])
 #names and dim names differences when using for matrix
+print(Colors_Additive_matrix[c("row1" ,"row2"), "col1"])
+cbind(Colors_Additive_matrix,col3 =c("cyan","magenta","pink"))
+rbind(Colors_Additive_matrix,col3 =c("cyan","magenta"))

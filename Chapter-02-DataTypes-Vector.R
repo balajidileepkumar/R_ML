@@ -11,11 +11,14 @@
 #Matrices
 #data.frame
 #Factors
+#Formulas
 #Arrays
 
 #Vectors
 #Vectors are datasctructure that contain similar type of data
 vector_numerical = c(6,7,8+2i)
+vector_numerical[1]
+#pi
 #typeof operator is used determine the type of the object
 typeof(vector_numerical) # [1] "double"
 length(vector_numerical) # [1] 3
@@ -31,9 +34,11 @@ typeof(vector_complex) # Result  [1] "complex"
 
 #Combining Vectors
 m =c(6,7,8,9)
+#typeof(m)
 n =c(1,2,3,4,5)
+#typeof(n)
 o = c(m,n)
-
+typeof(o)
 # Result [1] 6 7 8 9 1 2 3 4 5
 #combining different type of vectors
 Q= c("aa","bb","cc")
@@ -44,7 +49,7 @@ typeof(R)
 O = c(TRUE,FALSE)
 Q= c("aa","bb","cc")
 P= c(1,2,3)
-R  = c(Q,P)
+R  = c(Q,P,O)
 typeof(R)
 R  = c(O,P)
 typeof(R)
@@ -60,8 +65,9 @@ a-b #Subtract Result [1] -3 -3 -3 -3  1
 b-a #Subtract Result [1]  3  3  3  3 -1
 a/b #Divide Result [1] 0.2500000 0.4000000 0.5000000 0.5714286 1.2500000
 a%%b #Modulus Result [1] 1 2 3 4 1
+a%/%b#quotient 
 b%%a #Modulus Result [1] 0 1 0 3 4
-
+b%/%a
 #Here the vector with shortest length is recycled to match the vector with higher length to perform the arithmetic operation.
 
 #Relational Operators
@@ -79,13 +85,13 @@ a!=b# Result [1] TRUE TRUE TRUE TRUE TRUE
 #For Numeric - Values are considered to be true if it's value is greater than  1
 #For Logical - Values are considered to be true if it's value is TRUE
 
-#Element Wise Logical And
+#Element Wise /Bit Wise And
 #Result is true if the equivalent elements in both vectors are true
 x <- c(1, 1, TRUE, 2+3i)
 y <- c(2,1,FALSE, 2+3i)
 x&y #Result [1]  TRUE  TRUE FALSE  TRUE
-
-#Element Wise Logical OR
+x&&y
+#Element Wise /Bitwise OR
 #Combines first vector with second vector the result is true if one element in a is true.
 x <- c(0,0, TRUE, FALSE,2+2i)
 y <- c(1,0, FALSE, FALSE,2+3i)
@@ -103,7 +109,7 @@ y <- c(1,3,TRUE,2+3i)
 a <- c(FALSE, FALSE,1)
 b <- c(TRUE,TRUE,0)
 
-e <- c(FALSE, FALSE,1)
+e <- c(TRUE, FALSE,1)
 f <- c(TRUE,TRUE,0)
 
 x&&y # Result [1] TRUE
@@ -121,7 +127,7 @@ b <- c(TRUE,TRUE,0)
 
 #lets change data for e and f
 e <- c(FALSE, FALSE,0)
-f <- c(TRUE, FALSE,0)
+f <- c(FALSE, FALSE,0)
 
 x|y
 x||y

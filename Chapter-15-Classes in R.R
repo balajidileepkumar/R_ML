@@ -195,15 +195,20 @@ setRefClass("Polygon", fields = list(sides = "numeric"))
 Polygon <- setRefClass("Polygon", fields = c("sides"))
 square <- Polygon$new(sides = 4)
 x <- new("Polygon",sides=5)
-  
+class(square)  
+class(x)
+#objects copy by reference 
 triangle <- square
+square$sides <-6
 triangle$sides <- 3
-  
+############################
+class(triangle)
 square$sides        
 #methods are functions that operate within the context of the object and 
 #can modify its fields. These can also be added after object creation, 
 #as described below.
-  
+
+#Creating method during class creation  
 setRefClass("Dist")
 
 setRefClass("DistUniform", c("a", "b"), "Dist", methods = list(
@@ -214,11 +219,26 @@ mean <- function() {
 #You can also add methods after creation:
 # Instead of creating a class all at once:
 
-Person <- setRefClass("Person", methods = list(
+Person <- setRefClass("Person", c("Name"), methods = list(
       say_hello = function() message("Hello!"),
       say_hi = function() message("Hi!")
     ))
 Person$methods()  
+a <- new("Person", Name="Karthick")
+
+firstperson <- Person$new(Name="Nithiya")
+class(a)
+class(firstperson)
+
+a$say_hello()
+firstperson$say_hello()
+a$say_hi()
+firstperson$say_hi()
+
+#changing the property value 
+firstperson$Name = "Balaji"
+
+
 # You can build it up piece-by-piece
 Person <- setRefClass("Person")
 Person$methods()  
