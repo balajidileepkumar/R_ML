@@ -290,3 +290,24 @@ Person$methods()
 #   
 #   obj$initFields
 # )
+
+
+Assignment 
+#1. 
+#Create s4 AND R5 classes for person, student, employee, hr 
+#student, employee and hr should inherit from person class
+#student, employee and hr must have properties age, date of birth and Name as a compulsory property
+#student should have other properties for subjects (maths , science, english, tamil, history)
+#students should have methods for calculating total
+#given a list of n no of student objects, method should be created to return the rank of each students
+
+#employee
+#employee should have properties designation and years of experience and salary as their properties
+#given a list of employees, there should be a method to list the top five salaried persons 
+#also create a method to sort the employees based on salary (asc/desc)
+
+#Hr should inherit from employee class having value for property designation as HR
+#HR should have properties hired and fired.
+
+#2.
+#Tabulate the differences between S3, S4, and R5 Class
