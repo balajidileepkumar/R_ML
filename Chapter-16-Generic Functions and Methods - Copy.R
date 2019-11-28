@@ -6,7 +6,8 @@
 #for creating both generic functions and new methods.
 
 #The setGeneric function provides two main ways to create a new generic. 
-#You can either convert an existing function to a generic function, or you can create a new one from scratch.
+#You can either convert an existing function to a generic function, 
+#or you can create a new one from scratch.
 
 sides <- function(object){
   if(object > 0){
@@ -21,13 +22,16 @@ typeof(sides())
 sides(-1)
 
 setGeneric("sides")
-#If you create your own, the second argument to setGeneric should be a function that defines all the arguments that you want to dispatch on and contains a call to standardGeneric:
+#If you create your own, the second argument to setGeneric should be a function that 
+#defines all the arguments that you want to dispatch on and contains a call to 
+#standardGeneric:
   
 setGeneric("sides", function(object) {
     standardGeneric("sides")
   })
 
-#The following example sets up a simple hierarchy of shapes to use with the sides function.
+#The following example sets up a simple hierarchy of shapes to use 
+#with the sides function.
 
 setClass("Shape")
 setClass("Polygon", representation(sides = "integer"), contains = "Shape")
@@ -42,11 +46,14 @@ setClass("Circle", contains = "Shape")
 setMethod("sides", signature(object = "Polygon"), function(object) {
   object@sides
 })
-#For the others we supply exact values. Note that that for generics with few arguments you can simplify the signature without giving the argument names. This saves spaces at the expense of having to remember which position corresponds to which argument - not a problem if there's only one argument.
+#For the others we supply exact values. Note that that for generics with few 
+#arguments you can simplify the signature without giving the argument names. 
+#This saves spaces at the expense of having to remember which position corresponds to 
+#which argument - not a problem if there's only one argument.
 
 setMethod("sides", signature("Triangle"), function(object) 3)
 setMethod("sides", signature("Square"),   function(object) 4)
-setMethod("sides", signature("Circle"),   function(object) Inf)
+setMethod("sides", signature("Circle"),   function(object) 0)
 #You can optionally also specify valueClass to define the expected output of the generic. 
 #This will raise a run-time error if a method returns output of the wrong class.
 
@@ -54,7 +61,10 @@ setGeneric("sides", valueClass = "numeric", function(object) {
   standardGeneric("sides")
 })
 
-setMethod("sides", signature("Triangle"), function(object) "three")
+setMethod("sides", signature("Triangle"), function(object) 3)
+setMethod("sides", signature("Square"), function(object) 4)
+#setMethod("area", signature("Square"), function(object) object$side*object$side)
+
 a<- new("Triangle")
 b<-new("Square")
 sides(new("Triangle"))
@@ -73,7 +83,7 @@ showMethods("sides")
 # object="Square"
 # object="Triangle"
 
-showMethods(class = "Polygon")
+showMethods(class = "Square")
 # Function: initialize (package methods)
 # .Object="Polygon"
 #    (inherited from: .Object="ANY")

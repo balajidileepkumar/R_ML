@@ -4,18 +4,20 @@
 
 #S3 CLASS
 #S3 class type is an simplified class creation type.
+#method 1
 var1<-list(name="hari",age=40,Dept="HR")
 var2<-list(name="Vignesh",age=20,Dept="SALES")
 
 class(var1) <- "Employee"
 class(var2) <- "Employee"
-
-x<-structure(list(name="Rajesh",age=25,Dept="Production"),class="Employee")
-class(x)
-
+#method2
 ceo <-list(name="Rajesh",age=25,Dept="CEO")
 attr(ceo, "class") <- "CEO"
 class(ceo)
+#method3
+x<-structure(list(name="Rajesh",age=25,Dept="Production"),class="Employee")
+class(x)
+
 ##We have created the Employee objects in different ways
 
 print(var1)
@@ -25,7 +27,7 @@ print("#############")
 print(x)
 print("#############")
 #Now we can access the properties of each object independently
-print(paste(var1$name,var2$name,x$name, sep ="1:3"))
+print(paste(var1$name,var2$name,x$name,2:3, sep ="-"))
 
 
 ###
@@ -44,13 +46,8 @@ student <- function(stname,stage,stgrade){
 student_1 = student("Patrick",30,4)
 student_2 = student("Vinay",33,6)
 student_3 = student("Priya",20,5)
-### S Far we have created s3 class and object, lets see how to create methods to it which will
-## which will define the behaviour of it's objects
-
-print(student_1)
-## the above statement prints the student_1 information by listing up all properties. 
-#we can provide a different implementation according to the needs
-
+##################################################
+#Methods for class
 print.student(student_2)
 #here its applicable to other objects since it accepts objects of any different type
 student_1$name
@@ -60,13 +57,39 @@ student_1$age
 student_1$GPA
 
 print(student_1)
-
+###############
+#Adding a Method to Student Class
 student.print<- function(obj){
   cat("Name : ", obj$name,"\n") 
   cat("Age : ", obj$age,"\n") 
   cat("Grade : ", obj$GPA,"\n")
 }
 student.print(student_1)
+
+student.print(Employee_1)
+###########################################################################################
+##Employee Class
+#using structure keyword in constructor 
+Employee <- function(Em_name,Em_Age,Em_Dept){
+  if (!(Em_Age>21 && Em_Age<60)){
+    stop("Age must be between 21 and 60")
+  }
+  x<-structure(list(name=Em_name, age=Em_Age,Dept=Em_Dept),class="Employee")
+  return(x)
+}
+
+Employee_1 = Employee("Rajsree",35,"dancer")
+Employee_2 = Employee("Balaji",59,"Ds")
+Employee_3 = Employee("Priya",20,5)
+#######################################################
+print(Employee_1)
+print(Employee_2)
+print(Employee_3)
+
+## the above statement prints the student_1 information by listing up all properties. 
+#we can provide a different implementation according to the needs
+
+
 ############
 #S4 Classes
 #setClass((classname,attributes/components),prototype(name=attributes/components default))
@@ -82,8 +105,8 @@ Balaji <- new("Person")
 
 hadley <- new("Person", name = "Hadley", sex = "male")
 # invalid names for slots of class "Person": sex
-slot(hadley, "age")
-
+slot(Balaji, "age")
+slot(Balaji)
 #slot(hadley)
 
 setClass("Person", representation(name = "character", age = "numeric"), 
@@ -91,6 +114,16 @@ setClass("Person", representation(name = "character", age = "numeric"),
 hadley <- new("Person", name = "Hadley")
 hadley@age
 # [1] NA
+
+typeof(hadley@age)
+typeof(hadley@name)
+balaji <- new("Person")
+balaji@name
+balaji@age
+typeof(balaji@name)
+typeof(balaji@age)
+########################################
+#to identify the properties that is available using the class name
 getSlots("Person")
 #        name         age 
 
@@ -99,10 +132,17 @@ getSlots("Person")
 check_person <- function(object) {
   errors <- character()
   length_age <- length(object@age)
-  print(length_age)
-  print(object@age)
   if (length_age != 1) {
     msg <- paste("Age is length ", length_age, ".  Should be 1", sep = "")
+    errors <- c(errors, msg)
+  }
+  #print(typeof(object@weight))
+  if (typeof(object@weight) != "integer") {
+    msg <- paste("weight should be numeric - given", typeof(object@weight), sep=" ")
+    errors <- c(errors, msg)
+  }
+  if (length(object@weight) != 1) {
+    msg <- paste("weight is length ", length_age, ".  Should be 1", sep = "")
     errors <- c(errors, msg)
   }
   
@@ -114,25 +154,49 @@ check_person <- function(object) {
   
   if (length(errors) == 0) TRUE else errors
 }
-
-setClass("Person", representation(name = "character", age = "numeric"), 
+##################
+setClass("Person", representation(name = "character", age = "numeric", weight = "integer",height = "numeric"), 
+         prototype(name = NA_character_, age = NA_real_, weight= NA_integer_, height = NA_integer_),
          validity = check_person)
-new("Person", name = "Hadley")
-new("Person", name = "Hadley", age = 12)
+
+person_1 <- new("Person", name = "Hadley")
+
+person_2 <- new("Person", name = "Hadley", age = 12, weight=50)
 # invalid class "Person" object: Age is length 0.  Should be 1
-new("Person", name = "Hadley", age = 1:10)
+person_3 <- new("Person", name = "Hadley", age = 1:10)
 
 
 # But note that the check is not automatically applied when we modify 
 # slots directly
 hadley <- new("Person", name = "Hadley", age = 20)
+hadley <- new("Person", name = "Hadley", age = c(20))
+hadley <- new("Person", name = "Hadley", age = c(20,5))
+#incorrect value setting via property
 hadley@age <- 1:10
 
 # Can force check with validObject:
 validObject(hadley)
 # invalid class "Person" object: Age is length 10.  Should be 1
+#adding a method to the class
+setClass("Shape")
+setClass("Polygon", representation(sides = "integer"), contains = "Shape")
+setClass("Triangle", contains = "Polygon")
+setClass("Square", contains = "Polygon")
+setClass("Circle", contains = "Shape")
 
-
+sides <- function(object) 0
+setGeneric("sides")
+setMethod("sides", signature(object = "Polygon"), function(object) {
+  object@sides
+})
+setMethod("sides", signature(object = "Polygon"), function(object) {
+  object@sides
+})
+setMethod("sides", signature("Triangle"), function(object) 3)
+setMethod("sides", signature("Square"),   function(object) 4)
+setMethod("sides", signature("Circle"),   function(object) Inf)
+#########################################################################################
+################################################################################################
 #R5 classes/Reference Class
 # Reference classes
 # R has three object oriented (OO) systems: [[S3]], [[S4]] and Reference Classes (where the latter were for a while referred to as [[R5]], yet their official name is Reference Classes). This page describes this new reference-based class system.
@@ -194,12 +258,13 @@ setRefClass("Polygon", fields = list(sides = "numeric"))
 #or equivalently they have reference semantics:
 Polygon <- setRefClass("Polygon", fields = c("sides"))
 square <- Polygon$new(sides = 4)
-x <- new("Polygon",sides=5)
 class(square)  
+
+x <- new("Polygon",sides=5)
 class(x)
 #objects copy by reference 
 triangle <- square
-square$sides <-6
+square$sides <-4
 triangle$sides <- 3
 ############################
 class(triangle)
@@ -219,14 +284,15 @@ mean <- function() {
 #You can also add methods after creation:
 # Instead of creating a class all at once:
 
-Person <- setRefClass("Person", c("Name"), methods = list(
+Person <- setRefClass("Person", fields = c("fullname"), methods = list(
       say_hello = function() message("Hello!"),
       say_hi = function() message("Hi!")
     ))
 Person$methods()  
-a <- new("Person", Name="Karthick")
+#a <- new("Person", Name="Karthick")
+show(Person)
 
-firstperson <- Person$new(Name="Nithiya")
+firstperson <- Person$new("Nithiya")
 class(a)
 class(firstperson)
 
