@@ -63,6 +63,8 @@ anti_join(df_secondary, df_primary, by = c("y"="y"), copy= TRUE, suffix = c("Fro
 
 #nest_join(df_primary, df_secondary, by = c("y"="y"), copy= TRUE, suffix = c("From Primary", "From Secondary"), keep= TRUE)
 iris
+
+
 #Filter, Aggregate, Select, Group_by, Arrange, mutate
 add <- function(x) Reduce("+", x)#Reduce a list to a single value by iteratively applying a binary function
 add(list(1, 2, 3))
@@ -70,29 +72,50 @@ add(list(1, 2, 3))
 
 iris
 dimnames(iris)
+#library(dplyr) 
+#PATH <- "https://raw.githubusercontent.com/guru99-edu/R-Programming/master/travel_times.csv"
+#df <- read.csv(PATH)
+#glimpse(df)
 #FILTER
-result_data = filter(iris, Sepal.Length >= 2)
+result_data = filter(iris,Species == "setosa")
 
-rresult_data = filter(iris,  Petal.Length  >= 6.0)
+result_data = filter(iris, Petal.Length >= 2.0)
 
-result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6)
+result_data = filter(iris, Sepal.Length >= 5, Petal.Length >= 4)
 
-result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(.,Sepal.Length)
+result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(.~Sepal.Length)
+#pipe line
+library("magrittr")
+library("dplyr")
+x<-5
+
 #SELECT
-select(iris, Sepal.Length)
-
-result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(.,Sepal.Length,Species)
 #SELCECT
+result  = select(iris, Sepal.Length)
+
+result = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(Sepal.Length,Species)
+
+result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(Sepal.Length,Species)
+
+
 select(iris,Petal.Length,Species)
+#Group_BY
+mtcars
 
-group_by(iris, Sepal.Length)
+result <- group_by(mtcars, cyl)
+result <- group_by(mtcars, gear)
 
-result_data = group_by(iris, Species)
+bySpecs <- group_by(mtcars, gear, drat, hp)
 
-group_by(iris, Sepal.Length) %>% arrange(.,Sepal.Length)
+Flower <- group_by(iris, Petal.Length, Sepal.Length,Petal.Width)
+
+#arrange
+result <- group_by(iris, Sepal.Length) %>% arrange(.,Sepal.Length)
 
 #arrange order by column asc
 select(iris,Petal.Length,Species) %>% arrange(.,Petal.Length)
+select(iris,Petal.Length,Species) %>% arrange(Petal.Length)
+select(iris,Petal.Length,Species) %>% arrange(Species)
 #arrange order by column desc
 select(iris,Petal.Length,Species) %>% arrange(.,desc(Petal.Length))
 
@@ -103,24 +126,21 @@ New_Iris = mutate(iris,
        width_difference = Petal.Width - Sepal.Width,
 )
 
-library(tidyverse)
-library(dplyr)
-
-summarise(mtcars, delay = mean(wt, na.rm = TRUE))
-
-bySpecs <- group_by(mtcars, gear, drat, hp)
-
-Flower <- group_by(iris, Petal.Length, Sepal.Length,Petal.Width)
+#library(tidyverse)
+#library(dplyr)
+#create a resultant variable based on all the values of a column in a table
+result = summarise(mtcars, delay = mean(wt, na.rm = TRUE))
 
 Flower <- summarise(iris, mean=(5))
 
-
 summarise(mtcars, delay = mean(mpg, na.rm = TRUE))
 
-
-
 #aggregate
-aggregate(Flower,Sepal.Length, mean)
+#Splits the data into subsets, computes summary statistics for each, 
+#and returns the result in a convenient form.
+aggregate(iris, Sepal.Length)
 
-ag <- aggregate(iris,Sepal.Length, mean)
+aggregate(iris, Sepal.Length, FUN = mean)
+
+ag <- aggregate(mtcars,cyl, mean)
 
