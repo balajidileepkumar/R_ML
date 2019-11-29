@@ -43,7 +43,7 @@ write.csv(data, "c:\\Test\\helloworld.txt",sep=" ")
 #list.files(tempdir())
 write.table(iris,file=tempfile())
 #tempdir()
-FILES = list.dirs("C:\\Program Files (x86)")
+file_list = list.dirs("C:\\")
 
 #Function	Description
 #list.files	Lists files in a directory.

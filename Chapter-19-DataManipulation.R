@@ -66,6 +66,7 @@ iris
 
 
 #Filter, Aggregate, Select, Group_by, Arrange, mutate
+
 add <- function(x) Reduce("+", x)#Reduce a list to a single value by iteratively applying a binary function
 add(list(1, 2, 3))
 #########################################
@@ -81,9 +82,9 @@ result_data = filter(iris,Species == "setosa")
 
 result_data = filter(iris, Petal.Length >= 2.0)
 
-result_data = filter(iris, Sepal.Length >= 5, Petal.Length >= 4)
+result_data = filter(iris, Sepal.Length >= 5, Petal.Length >= 5)
 
-result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(.~Sepal.Length)
+result_data = filter(iris, Sepal.Length >= 5, Petal.Length >= 4) %>% select(Sepal.Length, Sepal.Width) 
 #pipe line
 library("magrittr")
 library("dplyr")
@@ -99,8 +100,10 @@ result_data = filter(iris, Sepal.Length >= 2, Petal.Length >= 6) %>% select(Sepa
 
 
 select(iris,Petal.Length,Species)
+
 #Group_BY
 mtcars
+length(mtcars)
 
 result <- group_by(mtcars, cyl)
 result <- group_by(mtcars, gear)
@@ -109,8 +112,15 @@ bySpecs <- group_by(mtcars, gear, drat, hp)
 
 Flower <- group_by(iris, Petal.Length, Sepal.Length,Petal.Width)
 
+Flower <- summarise(iris, result = mean(Petal.Length))
+#applies the function to each individual group
+Flower <- group_by(iris,Species) %>% summarise(result = mean(Petal.Length))
+
+Flower <- group_by(iris,Species) %>% ungroup() %>% summarise(result = mean(Petal.Length))
+
 #arrange
 result <- group_by(iris, Sepal.Length) %>% arrange(.,Sepal.Length)
+
 
 #arrange order by column asc
 select(iris,Petal.Length,Species) %>% arrange(.,Petal.Length)
@@ -118,6 +128,7 @@ select(iris,Petal.Length,Species) %>% arrange(Petal.Length)
 select(iris,Petal.Length,Species) %>% arrange(Species)
 #arrange order by column desc
 select(iris,Petal.Length,Species) %>% arrange(.,desc(Petal.Length))
+select(iris,Petal.Length,Species) %>% arrange(desc(Petal.Length))
 
 ##Mutate
 # adds new column based on any calculation
@@ -129,11 +140,13 @@ New_Iris = mutate(iris,
 #library(tidyverse)
 #library(dplyr)
 #create a resultant variable based on all the values of a column in a table
-result = summarise(mtcars, delay = mean(wt, na.rm = TRUE))
+result = summarise(mtcars, result_value = mean(wt, na.rm = TRUE))
 
-Flower <- summarise(iris, mean=(5))
+summarise(mtcars, result_value = mean(wt, na.rm = TRUE))
 
-summarise(mtcars, delay = mean(mpg, na.rm = TRUE))
+PetalLengthMedian_value <- summarise(iris, median(Petal.Length))
+
+summarise(mtcars, mean(mpg, na.rm = TRUE))
 
 #aggregate
 #Splits the data into subsets, computes summary statistics for each, 
@@ -142,5 +155,13 @@ aggregate(iris, Sepal.Length)
 
 aggregate(iris, Sepal.Length, FUN = mean)
 
-ag <- aggregate(mtcars,cyl, mean)
+aggregate(mtcars, list(mtcars$cyl), median)
+
+aggregate(iris, list(iris$Petal.Length), mean)
+
+mtcars$cyl
+
+#subset
+subset(iris, Petal.Length >5)
+
 
