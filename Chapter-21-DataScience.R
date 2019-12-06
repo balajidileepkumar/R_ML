@@ -41,14 +41,18 @@ print(result)
 #########################################################
 #Linear
 #########################################################
+#lm is used to fit linear models. It can be used to carry out regression, single stratum analysis of variance and analysis of covariance 
 x1 <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
 y1 <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
 # Apply the lm() function.
 relation <- lm(y1~x1)
+print(class(relation))
 methods(class=class(relation))
+methods(class = "lm")
+
 summary(relation)
 show(relation)
-anova(relation)
+#anova(relation)
 print(relation)
 plot(relation)
 
@@ -73,7 +77,8 @@ anova(model)
 model1 <- lm(mpg~disp+hp+wt, data = input)
 methods(class=class(model1))
 #Check the models plot
-plot(model1)
+plot(model1, type="b", main="multiple linear regression", sub="second", xlab="hp+wt+disp",ylab="mpg")
+result = plot(model1)
 # Show the model.
 print(model)
 
@@ -84,7 +89,6 @@ a <- coef(model)[1]
 print(a)
 
 Xdisp <- coef(model)[2]
-Xdisp
 Xhp <- coef(model)[3]
 Xwt <- coef(model)[4]
 
@@ -101,7 +105,27 @@ input <- mtcars[,c("am","cyl","hp","wt")]
 am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = binomial)
 
 am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = gaussian)
+
+
+#binomial(link = "logit")
+#gaussian(link = "identity")
+#Gamma(link = "inverse")
+#inverse.gaussian(link = "1/mu^2")
+#poisson(link = "log")
+#quasi(link = "identity", variance = "constant")
+#quasibinomial(link = "logit")
+#quasipoisson(link = "log"
+
 print(summary(am.data))
+#In statistics, deviance is a goodness-of-fit statistic for a statistical model; it is often used for statistical hypothesis testing.
+
+#The null deviance shows how well the response is predicted by the model with 
+#nothing but an intercept.
+
+#The residual deviance shows how well the response is predicted by the model when 
+#the predictors are included.
+
+
 #input
 #xtest = input[0,5]
 #xtest

@@ -21,16 +21,17 @@ print(trunc(y))
 x = 2
 sqrt(x)
 #round 
-x  =1.451789
+x  =11.451789
 round(x,2) #rounds to that no of decimal places
 round(x,3)
 round(x,4)
 round(x,5)
-x = -1.451789
+x = 11.451789
 #signif 
-signif(x,2)#considers rounding off from that digit specified
+signif(x,2)#considers total digits before and after decimal
 signif(x,3)
 signif(x,4)
+signif(x,5)
 
 #cos, sin , tan 
 a = 0 
@@ -61,25 +62,28 @@ print(x)
 
 pattern ="[0-9]"#"hello", "HeLLo"
 
-x1 =c("1dac","a2bc","abc","b5ca")
+x1 =c("1dac","abc","abc9","b5ca")
 y1 = grep(pattern,x1, ignore.case = TRUE, fixed = FALSE)
 print(y1)
 #get matches
 x1[y1]
 
 
-x2 = "helloworld"
+x2 = "helloworld23"
 y2 = grep(pattern,x2, ignore.case = TRUE, fixed = FALSE)
 print(y2)
 
 pattern ="[0-9]+"
 y2 = grep(pattern,x2, ignore.case = TRUE, fixed = FALSE)
 print(y2)
+#grepl, regexpr, gregexpr, sub and gsub, as well as by strsplit.
 ##################################
 #sub#
 pattern = "[a-z]+"
+
 y ="#Welcome 2 R studio"
 z = sub(pattern, "Language", y, ignore.case = TRUE, fixed = FALSE)
+
 y1 =c("dac","a2bc","b5ca")
 z1 = sub(pattern, "Language", y1, ignore.case = FALSE, fixed = FALSE)
 
@@ -120,5 +124,8 @@ d1 = str_to_title(x)
 d2 = str_to_title("welcome to python")
 
 ####################################################################
+a = c(1,4,5)
+b = c(2,3,4)
+c = union(a,b)
 
-
+d = intersect(a,b)

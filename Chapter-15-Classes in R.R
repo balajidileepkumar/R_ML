@@ -47,17 +47,33 @@ student_1 = student("Patrick",30,4)
 student_2 = student("Vinay",33,6)
 student_3 = student("Priya",20,5)
 ##################################################
-#Methods for class
-print.student(student_2)
-#here its applicable to other objects since it accepts objects of any different type
-student_1$name
+teacher <- function(stname,stage,st_subj){
+  if(stage<20||stage>60){
+    stop("grade must be between 20 and 60")
+  }
+  value <-list(name=stname,age=stage,sub= st_subj)
+  attr(value,"class")<-"teacher"
+  return(value)
+}
 
-student_1$age
+teacher_1 = teacher("Patrick",30,"Maths")
+teacher_2 = teacher("Vinay",33,"6","Physics")
+teacher_3 = teacher("Priya",20,"Chemistry")
 
-student_1$GPA
-
-print(student_1)
 ###############
+
+print.student <- function(x) paste(x$name," is a ", "student")
+print.teacher <- function(x) paste(x$name," is a ", "teacher and his age is ", x$age) 
+print.default <- function(x) "All others"
+
+print(student_2)
+print(student_3)
+print(student_1)
+print(teacher_2)
+print(teacher_1)
+print(teacher_3)
+print(ceo)
+
 #Adding a Method to Student Class
 student.print<- function(obj){
   cat("Name : ", obj$name,"\n") 
@@ -93,6 +109,29 @@ print(Employee_3)
 ############
 #S4 Classes
 #setClass((classname,attributes/components),prototype(name=attributes/components default))
+
+
+setClass("Person", slots = list(name = "character", age = "numeric"))
+Person <- function(P_name,P_age){
+  value <-list(name=P_name,age=P_age)
+  attr(value,"class")<-"Person"
+  return(value)
+}
+
+setClass("Employee",slots = list(boss = "Person"), contains = "Person")
+
+alice <- new("Person", name = "Alice", age = 40)
+P1 <- Person("Ravi", 26)
+
+john <- new("Employee", name = "John", age = 20, boss = P1)
+
+john@boss
+john@.Data
+
+slot(john, boss)
+john@.Data
+
+
 
 setClass("Person", representation(name = "character", age = "numeric"))
 setClass("Employee", representation(boss = "Person"), contains = "Person")
@@ -200,13 +239,6 @@ setMethod("sides", signature("Circle"),   function(object) Inf)
 #R5 classes/Reference Class
 # Reference classes
 # R has three object oriented (OO) systems: [[S3]], [[S4]] and Reference Classes (where the latter were for a while referred to as [[R5]], yet their official name is Reference Classes). This page describes this new reference-based class system.
-
-setRefClass(Class, fields = , contains = , methods =,
-            where =, inheritPackage =, ...)
-
-getRefClass(Class, where =)
-
-
 # Reference Classes (or refclasses) are new in R 2.12. 
 #They fill a long standing need for mutable objects that had previously been filled by 
 #non-core packages like R.oo, proto and mutatr. While the core functionality is solid,
@@ -216,24 +248,111 @@ getRefClass(Class, where =)
 # 
 # There are two main differences between reference classes and S3 and S4:
 #   
-#   Refclass objects use message-passing OO
-# Refclass objects are mutable: the usual R copy on modify semantics do not apply
-# These properties makes this object system behave much more like Java and C#. 
+#Refclass objects use message-passing OO
+#Refclass objects are mutable: the usual R copy on modify semantics do not apply
+#These properties makes this object system behave much more like Java and C#. 
 #Surprisingly, the implementation of reference classes is almost entirely in R code - 
 #they are a combination of S4 methods and environments. This is a testament to the 
 #flexibility of S4.
 # 
-# Particularly suited for: simulations where you're modelling complex state, GUIs.
+#Particularly suited for: simulations where you're modelling complex state, GUIs.
 # 
-# Note that when using reference based classes we want to minimise side effects, 
+#Note that when using reference based classes we want to minimise side effects, 
 #and use them only where mutable state is absolutely required. The majority of functions should still be "functional", and side effect free. This makes code easier to reason about (because you don't need to worry about methods changing things in surprising ways), and easier for other R programmers to understand.
 # 
-# Limitations: can't use enclosing environment - because that's used for the object.
+#Limitations: can't use enclosing environment - because that's used for the object.
 # 
-# Classes and instances
-# Creating a new reference based class is straightforward: you use setRefClass. Unlike setClass from S4, you want to keep the results of that function around, because that's what you use to create new objects of that type:
-#   
+
+
+#Creating a new reference based class is straightforward: you use setRefClass. 
+#Unlike setClass from S4, you want to keep the results of that function around, 
+#because that's what you use to create new objects of that type:
+  
 # Or keep reference to class around.
+Person <- setRefClass("Person")
+Person$new()
+#A reference class has three main components, given by three arguments to setRefClass:
+#contains, the classes which the class inherits from. These should be other reference 
+#class objects:
+  
+Account <- setRefClass("Account")
+firstaccount <- Account$new()
+
+Account <- setRefClass("Account",fields = list(balance = "numeric"))
+a <- Account$new(balance = 100)
+a$balance
+b <- a$copy()
+b$balance = 200
+
+Account <- setRefClass("Account", fields = list(balance = "numeric"), methods = list(
+                         withdraw = function(x) {
+                           balance <<- balance - x
+                         },
+                         deposit = function(x) {
+                           balance <<- balance + x
+                         }
+                       )
+)
+
+a <- Account$new(balance = 1000)
+a$withdraw(100)
+a$deposit(500)
+a$withdraw(600)
+a$withdraw(1600)
+
+NoOverdraft <- setRefClass("NoOverdraft", contains = "Account",
+                           methods = list(
+                             withdraw = function(x) {
+                               if (balance < x) stop("Not enough money")
+                               balance <<- balance - x
+                             }
+                           )
+)
+
+a <- NoOverdraft$new(balance = 1000)
+a$withdraw(1200)
+a$deposit(500)
+
+
+setRefClass("Polygon")
+setRefClass("Regular")
+
+# Specify parent classes
+setRefClass("Triangle", contains = "Polygon")
+setRefClass("EquilateralTriangle", 
+contains = c("Triangle", "Regular"))
+
+#fields are the equivalent of slots in S4. They can be specified as a vector of field 
+#names, or a named list of field types:
+  
+setRefClass("Polygon", fields = c("sides"))
+setRefClass("Polygon", fields = list(sides = "numeric"))
+#The most important property of refclass objects is that they are mutable, or 
+#equivalently they have reference semantics:
+  
+Polygon <- setRefClass("Polygon", fields = c("sides"))
+square <- Polygon$new(sides = 4)
+
+triangle <- square
+triangle$sides <- 3
+
+square$sides        
+#methods are functions that operate within the context of the object and can modify its 
+#fields. These can also be added after object creation, as described below.
+
+setRefClass("Dist")
+setRefClass("DistUniform", c("a", "b"), "Dist", methods = list(
+mean <- function() {
+    (a + b) / 2
+  }
+))
+#You can also add methods after creation:
+setRefClass(Class, fields = , contains = , methods =,
+            where =, inheritPackage =, ...)
+
+getRefClass(Class, where =)
+
+#Example2 
 Person <- setRefClass("Person")
 typeof(Person)
 Peter <- Person$new()

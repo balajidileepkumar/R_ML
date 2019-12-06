@@ -159,6 +159,10 @@ aggregate(mtcars, list(mtcars$cyl), median)
 
 aggregate(iris, list(iris$Petal.Length), mean)
 
+aggregate(iris, list(iris$Petal.Length), mean)
+
+
+
 mtcars$cyl
 
 #subset

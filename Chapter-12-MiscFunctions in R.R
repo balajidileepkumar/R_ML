@@ -8,15 +8,19 @@ b_seq = seq(2,10,3)
 b_seq = seq(2,10,7)
 seq_jump = seq(from =20, to = 100, by =10)
 #Length.Out - No of Values Required
-b_seq = seq(2,10,length.out = 5)
+b_seq = seq(2,10,length.out = 25)
 seq_jump = seq(from =20, to = 100, length.out = 10)
 print(seq_jump)
 #along.with
-a_seq =  seq(along.with = 20)
-a_seq =  seq(along.with = list(1,2,3+4i,TRUE, "Hello World"))
-a_seq = seq(c(1,2,1))
-a_seq = seq(c(1,2,1))
-a_seq = seq(c(10001,2,5,20))
+a_seq_1 =  seq(along.with = 20)
+a_seq_1
+a_seq_2 =  seq(along.with = list(1,2,3+4i,TRUE, "Hello World"))
+a_seq_2
+a_seq_3 = seq(c(1,2,1))
+a_seq_3
+a_seq_4 = seq(c(1,2,1))
+a_seq_4
+a_seq_5 = seq(c(10001,2,5,20))
 ###
 #length.out
 a_seq = seq(length.out = 20)
@@ -42,10 +46,13 @@ y_duplicated = duplicated(x)
 print(y_duplicated)
 print(class(y_duplicated))
 print(y_duplicated)
+#x[!y_duplicated]
 print(!y_duplicated)
 unique_using_duplicated = x[!y_duplicated]
 print(unique_using_duplicated)
 #dplyr::distinct(x,TRUE)
+
+#sort[x]
 
 x =20
 
@@ -64,7 +71,7 @@ x %>% log() %>%
   exp() %>%
   round(1)
 
-# Op Null Default -> represents the value of  y if x is null
+#Op Null Default -> represents the value of  y if x is null
 library(tidyverse)
 x %||% y
 x = NULL

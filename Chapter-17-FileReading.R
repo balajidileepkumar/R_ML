@@ -47,11 +47,26 @@ file_list = list.dirs("C:\\")
 
 #Function	Description
 #list.files	Lists files in a directory.
+files_list = list.files("c:\\Test\\")
+files_list = list.files("C:\\Source\\PythonDSML", pattern ="*.csv",ignore.case = TRUE, recursive = TRUE)
+
+
 #list.dirs	Lists subdirectories of a directory.
+direc = list.dirs("C:\\Source\\PythonDSML",  recursive = TRUE,full.names = TRUE)
+
 #file.exists	Tests whether a specific file exists in a location.
+file_exists = file.exists("C:\\Source\\PythonDSML\\PythonPandas/Pandas2ndLevel/data/msft_modified_01.csv")
+
 #file.create	Creates a file.
+file.create("C:\\Source\\PythonDSML\\PythonPandas/Pandas2ndLevel/data/msft_modified_21.csv")
+
+
 #file.remove	Deletes files (and directories in Unix operating systems).
+
 #tempfile	Returns a name for a temporary file. If you create a file
+result_file  = tempfile()
+file.create(tempfile())
+tempdir()
 #- for example, with file.create()
 #or write.table() using this returned name
 #- R will create a file in a temporary folder.
