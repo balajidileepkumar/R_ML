@@ -1,4 +1,4 @@
-##############Apply FUnctions################################
+##############Apply Functions################################
 #Apply
 #lapply
 #SApply
@@ -69,7 +69,7 @@ typeof(f)
 #sapply 
 #returns vector instead of a list
 
-mean_vect = sapply(data,FUN= mean)
+mean_vect = sapply(data,mean)
 typeof(mean_vect)
 
 mean_list = lapply(data, mean)
@@ -95,6 +95,7 @@ y <-6:10
 result = mapply(sum,x,y)
 result_matrix = mapply(sum,data_a,data_b)
 res = mapply(sum,1:4,1:4,1:4)
+typeof(1:4)
 res = mapply(sum,1:4,11:14,21:24)
 res = mapply(rep,1,1:4)
 res = mapply(rep,1:4,2)
@@ -106,7 +107,15 @@ res = mapply(rep,1:4,1:2)
 #Applies a function or an operation on a vector subset
 library(datasets)
 mtcars
+
+library("magrittr")
+library("dplyr")
+
+result = subset(mtcars, mtcars$cyl == 8) %>% select(wt) %>% sum()
+result = subset(mtcars, mtcars$cyl == 8) %>% select(wt) %>% length()
+
 result = tapply(mtcars$wt,mtcars$cyl,mean)
+
 result = tapply(mtcars$cyl,mtcars$wt,mean)
 result
 res = mapply(rep,1,1:4)
@@ -114,15 +123,21 @@ res = mapply(rep,1,1:4)
 # Recursive apply
 x = list(1,2,3,4)
 rapply_result = rapply(x,function(x){x+2})
+
 lapply(x,function(x){x+2})
+
 rapply_result = rapply(x,function(x){x+2},class=c("numeric"))
+
 x = list(3,list(4,5),6,list(7,list(8,9)))
+
 x_1 = list(3,list(4,5))
+
 square.function =  function(x){  
   x**2
   }
 square.function(10)
 rapply_result = rapply(x,square.function)
+lapply_result = lapply(x, square.function)
 rapply_result = rapply(x_1,square.function)
 rapply_result = rapply(x,mean)
 

@@ -8,10 +8,10 @@
 inputs = list(1, 2, 4, -5, 'oops', 0, 10)
 for(input in inputs) {
 tryCatch(print(paste("log of", input, "=", log(input))),
-warning = function(w) {print(paste("negative argument", input));log(-input)},
-error = function(e) {print(paste("non-numeric argument", input));NaN}
+warning = function(w) {print(paste("negative argument", input, "warning is ", w));log(-input)},
+error = function(e) {print(paste("non-numeric argument", input, "error is", e ));NaN},
+suppressWarnings({"Ignore"})
 )}
-
 ###################################################################
 robustLog = function(x) {
   tryCatch(stop(x),
@@ -23,7 +23,7 @@ for(input in inputs) {
 }
 ###################################################################
 check_value <- function(x){if(x>10) {"success"} else {stop(x)}}
-check_value(20)
+check_value(9)
 ##########################
 check_value(9)
 inputs_2 = list(11,12,14,9)
@@ -41,8 +41,8 @@ inputs_2 = list(11,12,14,9)
 robustLog = function(x) {
   tryCatch(check_value(x),
            warning = function(w) {print(paste("negative argument", x, w)); log(-x)},
-           error = function(e) {print(paste("error Occured", x, e)); NaN} )
-           #suppressWarnings({"Ignore"}))
+           error = function(e) {print(paste("error Occured", x, e)); NaN}, 
+           suppressWarnings({"Ignore"}))
 }
 for(input in inputs_2) {
   print(paste("robust log of", input, "=", robustLog(input)))

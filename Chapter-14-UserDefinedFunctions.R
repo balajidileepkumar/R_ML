@@ -8,10 +8,15 @@
 #  returnobject  
 #}
 farentheit_kelvin <- function(temp_farent) {
+  if(typeof(temp_farent) != "double")
+  {
+    stop("invalid input")
+  }
   temp_kelvin <- ((temp_farent-32)*(5/9))+273.15
   temp_kelvin
 }
 farentheit_kelvin(100)
+farentheit_kelvin("100")
 ###
 kelvin_celsius <- function(temp_kelvin){
   temp_celcius <- (temp_kelvin -273.15)
@@ -31,6 +36,7 @@ Increment_x<-function(input1, input2 =5){
   output
 }
 Increment_x(input_1)
+Increment_x(input_1,input_1)
 Increment_x()
 ### alternatively a return keyword can also be used for returning data in a function
 Increment_x<-function(input1, input2 =5){

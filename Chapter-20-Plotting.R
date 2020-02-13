@@ -23,6 +23,7 @@ library(ggplot2)
 iris <- read.csv("iris.csv")
 ####################################################################################################
 names(iris) <- c( "Petal.Length", "Petal.Width","Sepal.Length", "Sepal.Width", "Species")
+#aes - > aesthetics
 ir <- ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) + geom_point(color="red") + geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
 plot(ir)
 #require(ggplot2)
@@ -51,7 +52,7 @@ plot(b)
 library(ggplot2)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "red",shape="hexagon",stroke =6.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
-g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "red",fill="blue",shape="square",stroke =2.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "red",fill="blue",shape="square",stroke =0.2) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(fill="blue",shape="circle",stroke =2.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
@@ -59,7 +60,8 @@ g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alph
 plot(g)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alpha = 0.1, size = 12.0, fill="blue",shape="square",stroke =6.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
-g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alpha = 1.0, fill="red",shape="square",stroke =6.0) + geom_smooth(method="lm",color="red") + geom_hex(fill="navyblue",color="blue")# set se=FALSE to turnoff confidence bands
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point( alpha = 1.0, fill="red",shape="square",stroke =6.0) + geom_smooth(method="lm",color="red") +geom_count(1)
+#+ geom_hex(fill="navyblue",color="blue")# set se=FALSE to turnoff confidence bands
 plot(g)
 #Alternatively, you can summarise the number of points at each location and display that in some way, using geom_count(), geom_hex(), or geom_density2d().
 alpha
@@ -82,7 +84,7 @@ g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(metho
 
 #Another technique is to make the points transparent (e.g. geom_point(alpha = 0.05)) or very small (e.g. geom_point(shape = "."))
 # Delete the points outside the limits
-g <- g + xlim(c(0, 0.1051)) + ylim(c(0, 4000000))   # deletes points
+g <- g + xlim(c(0.0125, 0.1051)) + ylim(c(0, 2500000))   # deletes points
 plot(g)
 # g + xlim(0, 0.1) + ylim(0, 1000000)   # deletes points
 g <- g + xlim(c(0, 0.5)) + ylim(c(0, 200000))   # deletes points
@@ -137,11 +139,12 @@ plot(g1)
 ######################################
 ### Changing Color and Size
 library(ggplot2)
-ggplot(midwest, aes(x=area, y=poptotal)) +
+g <- ggplot(midwest, aes(x=area, y=poptotal)) +
   geom_point(col="yellow", size=3) +   # Set static color and size for points
   geom_smooth(method="auto", col="firebrick") +  # change the color of line
   coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
   labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
+plot(g)
 #"auto", "lm", "glm", "gam", "loess" 
 #auto picks one among those 4 methods above suiting the dat
 #changing various Methods 
@@ -201,7 +204,7 @@ plot(gg)
 # Change breaks
 #changing the scale
 gg <- gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01))
-gg <- gg + scale_y_continuous(breaks=seq(0, 1000000, 250000))
+gg <- gg + scale_y_continuous(breaks=seq(0, 1000000, 200000))
 plot(gg)
 #################
 #Changing Labels

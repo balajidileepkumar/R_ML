@@ -54,7 +54,7 @@ print(Row_Indexable_Matrix[1,1])
 #Get the Second Element
 print(Row_Indexable_Matrix[8])
 #Get the Second Row
-print(Row_Indexable_Matrix[2,])
+print(Row_Indexable_Matrix[,3])
 #Get sequence of Rows from 1 to 2
 print(Row_Indexable_Matrix[1:2,])
 print(Row_Indexable_Matrix[c(1:3),1:2])
@@ -119,5 +119,5 @@ print(Colors_Additive_matrix["row3", "col1"])
 print(Colors_Additive_matrix[c("row1" : "row2"), "col1"])
 #names and dim names differences when using for matrix
 print(Colors_Additive_matrix[c("row1" ,"row2"), "col1"])
-cbind(Colors_Additive_matrix,col3 =c("cyan","magenta","pink"))
-rbind(Colors_Additive_matrix,col3 =c("cyan","magenta"))
+result_cbind = cbind(Colors_Additive_matrix,col3 =c("cyan","magenta","pink"))
+result_rbind = rbind(Colors_Additive_matrix,row4 =c("cyan","magenta"))

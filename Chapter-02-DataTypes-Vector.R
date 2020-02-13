@@ -16,6 +16,7 @@
 
 #Vectors
 #Vectors are datasctructure that contain similar type of data
+#it's single in dimension
 vector_numerical = c(6,7,8+2i)
 vector_numerical[1]
 #pi
@@ -34,9 +35,10 @@ typeof(vector_complex) # Result  [1] "complex"
 
 #Combining Vectors
 m =c(6,7,8,9)
-#typeof(m)
+typeof(m)
 n =c(1,2,3,4,5)
-#typeof(n)
+typeof(n)
+
 o = c(m,n)
 typeof(o)
 # Result [1] 6 7 8 9 1 2 3 4 5
@@ -65,7 +67,7 @@ a-b #Subtract Result [1] -3 -3 -3 -3  1
 b-a #Subtract Result [1]  3  3  3  3 -1
 a/b #Divide Result [1] 0.2500000 0.4000000 0.5000000 0.5714286 1.2500000
 a%%b #Modulus Result [1] 1 2 3 4 1
-a%/%b#quotient 
+a%/%b#integer quotient 
 b%%a #Modulus Result [1] 0 1 0 3 4
 b%/%a
 #Here the vector with shortest length is recycled to match the vector with higher length to perform the arithmetic operation.
@@ -172,7 +174,7 @@ a[-5:-1] # Eliminates the negative sequence from 5th poisiton to 1st position
 a[c(1,3,7,9)] #Result [1] 1 2 3 6 7 # Selecting Particular values with input vector containg indexe to be selected
 a[-1:-6]#Result [1] 6 7 7 8 9 negative index starts from the right.
 a[-3:-9]#Result [1] 11 12  8  9
-a[c(-1,-2,-4,-5)]
+a[c(-1,-2,-4,-5,-10)]
 #Result [1] 6 6 7 7 8 9  # Selecting Particular values with input vector containg indexe to be selected
 a[c(-1,-4,-5)] #Result [1] 6 6 7 7 8 9  # Selecting Particular values with input vector containg indexe to be selected
 #Logical Indexing
@@ -203,6 +205,5 @@ languages["Good"]
 languages["Very Best"] #Result Very Best
 "R Language"
 languages[c("Best","Very Best")]
-#Some Example
 
 

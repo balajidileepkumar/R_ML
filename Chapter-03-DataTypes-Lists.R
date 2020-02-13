@@ -1,4 +1,6 @@
 #Creating Normal List From Vectors
+#list is a collection of items of different type
+#it's multidimenisional
 basic_list  =list(1,2,3+4i,TRUE, "Hello World")
 typeof(basic_list)
 
@@ -14,7 +16,8 @@ print(Q_list)
 Q_list$float
 Q_list$boolean
 
-Q_list$numbers[1]
+Q_list$numbers[3]
+
 Q_list$boolean[2]
 
 Q_list$float
@@ -23,11 +26,13 @@ Q_list$boolean
 #Creating named Lists
 NoNamedList = list(c("Raj","Dilip","Jai"),c(23,27,25),c(14000.00, 12000.00, 15000.00))
 names(NoNamedList) = c("Name","Age")
+
 my_named_list = list(name=c("Raj","Dilip","Jai"),age=c(23,27,25),salary=c(14000.00, 12000.00, 15000.00))
 print(my_named_list)
 #List Slicing (is equivalent to indexing only it's when read)
 print(my_named_list["name"])
-
+my_named_list$name[1]
+my_named_list[["name"]]
 print(my_named_list[["name"]][1])
 my_named_list$name[1]
 
@@ -67,3 +72,8 @@ name
 age
 salary
 attach(my_named_list)
+
+class(my_named_list)
+a =5.0
+class(a)
+typeof(a)

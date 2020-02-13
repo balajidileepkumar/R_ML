@@ -3,7 +3,7 @@
 #creating a dataframe
 #Each Row in the data frame must have equal length
 #ie) It should have equal no of column values
-my_dataframe <- data.frame(a =c(1,2,3+2i,4), b=c(1,2,3,4))
+my_dataframe <- data.frame(a =c(1,2,3+2i,4), b=c(1,2,3.0,4))
 #print is not possible since there is an
 #error in initialization of dataframe due to different no of columns
 print(my_dataframe)
@@ -23,12 +23,12 @@ print(my.company.dataframe.employees)
 #Students
 my.school.students <- data.frame(name=c("Krishna","Akshay","Nancy","Preethi"),
                                  Gender= c("male","male","female","female"),
-
                                  age =c(19,17,20,18))
+
 my.school.teachers <- data.frame(name=c("Krishna","Akshay","Nancy","Preethi"),
                                  Gender= c("male","male","female","female"),
-                                 
                                  age =c(39,47,29,38))
+
 print(my.school.students)
 print(my.school.teachers)
 #Students
@@ -72,14 +72,14 @@ print(my.school.students)
 #Lets add another column using cbind
 
 Rank <- c(2,4,1,5)
-cbind(my.school.students,Rank)
+newcolumn = cbind(my.school.students,Rank)
 #Actual DataFrame is not assigned
 my.school.students<-cbind(my.school.students,Rank)
 print(my.school.students)
 # To add an Additional Row
 new_student = c("Akash","male",21,"Drawing",3)
 typeof(new_student)
-rbind(my.school.students,new_student)
+result = rbind(my.school.students,new_student)
 new_student = data.frame(name = "Akash",Gender = "male",age = 21,Specialization= "Drawing",Rank=3)
 typeof(new_student[1])
 typeof(new_student[2])

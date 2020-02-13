@@ -1,9 +1,13 @@
-#This version of R 3.6 is called as feather spray
+#This version of R 3.6.1 is called as feather spray
+#This version of R 3.6.2 is called as feather spray
+
 #Variables in R
 a = 3
 typeof(a)
-as.integer(a)
-b <- 2.0 
+x = as.integer(a)
+typeof(x)
+is.integer(a)
+b <<- 2.0 
 typeof(b)
 a + b -> c
 20 + a -> c

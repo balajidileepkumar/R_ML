@@ -77,6 +77,7 @@ x %||% y
 x = NULL
 y<-5
 a <-  NULL %||% y
+x =1
 b <-  x %||% y
 x <-10
 c <-  x %||% y

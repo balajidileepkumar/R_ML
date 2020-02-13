@@ -1,7 +1,5 @@
 #Basic Datatypes in R
-# Numeric
-# integer
-# Complex
+# Numeric - integer double Complex
 # Logical
 # Character
 
