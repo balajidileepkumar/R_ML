@@ -53,7 +53,6 @@ exp(0)
 x = "Hello World "
 y = substr(x, start=5, stop =10 )
 print(y)
-print(x)
 ##################################
 #grep
 #grep(pattern,x, ignore.case = FALSE,fixed = FALSE)
@@ -127,5 +126,4 @@ d2 = str_to_title("welcome to python")
 a = c(1,4,5)
 b = c(2,3,4)
 c = union(a,b)
-
 d = intersect(a,b)

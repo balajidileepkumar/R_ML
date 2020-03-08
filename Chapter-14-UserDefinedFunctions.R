@@ -31,11 +31,13 @@ farent_celsius(100)
 #Default Parameters
 #Keyword argument follows positional argument
 input_1 =10
-Increment_x<-function(input1, input2 =5){
+Increment_x<-function(input1, input2 =5)
+{
   output <-input1 + input2
   output
 }
-Increment_x(input_1)
+
+result = Increment_x(input_1)
 Increment_x(input_1,input_1)
 Increment_x()
 ### alternatively a return keyword can also be used for returning data in a function

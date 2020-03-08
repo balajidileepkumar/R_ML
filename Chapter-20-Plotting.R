@@ -1,15 +1,5 @@
-library(plotly)
-x <- c(1:100)
-random_y <- rnorm(100, mean = 0)
-data <- data.frame(x, random_y)
-
-p <- plot_ly(data, x = ~x, y = ~random_y, type = 'scatter', mode = 'lines')
-
-# Create a shareable link to your chart
-# Set up API credentials: https://plot.ly/r/getting-started
-chart_link = api_create(p, filename="line-basic")
-chart_lin
 ######GG PLOT
+#https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf
 ##################################################
 ######### Iris Plotting
 ################
@@ -32,10 +22,15 @@ plot(ir)
 options(scipen=999)  # turn off scientific notation like 1e+06
 library(ggplot2)
 midwest_graph  <- data("midwest", package = "ggplot2")  # load the data
+nrow(midwest)
+ncol(midwest)
+
 # midwest <- read.csv("http://goo.gl/G1K41K") # alt source
 plot(midwest_graph)
 # Init Ggplot
 ggplot(midwest, aes(x=area, y=poptotal))  # area and poptotal are columns in 'midwest'
+cols(midwest)
+names(midwest)
 
 ################################
 #Scatter Plotting
@@ -54,19 +49,27 @@ g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "red",shape="
 plot(g)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "red",fill="blue",shape="square",stroke =0.2) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
-g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(fill="blue",shape="circle",stroke =2.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color="magenta",shape="circle",stroke =2.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alpha = 0.5, fill="blue",shape="triangle",stroke =6.0) + geom_smooth(method="lm",color="red")  # set se=FALSE to turnoff confidence bands
 plot(g)
-g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alpha = 0.1, size = 12.0, fill="blue",shape="square",stroke =6.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point(color = "green", alpha = 1.0, size = 12.0, fill="blue",shape="circle",stroke =6.0) + geom_smooth(method="lm",color="green")  # set se=FALSE to turnoff confidence bands
 plot(g)
-g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point( alpha = 1.0, fill="red",shape="square",stroke =6.0) + geom_smooth(method="lm",color="red") +geom_count(1)
-#+ geom_hex(fill="navyblue",color="blue")# set se=FALSE to turnoff confidence bands
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point( alpha = 1.0, fill="red",shape="diamond plus",stroke =6.0) + geom_smooth(method="lm",color="red") +geom_count(1)
+plot(g)
+#Geom_hex
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_hex(aes(x=area, y=poptotal, fill="brown", alpha= 0.2))# set se=FALSE to turnoff confidence bands
+plot(g)
+#Geom_line
+#https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point( alpha = 1.0, color="yellow",shape="triangle",stroke =1.0, size=1.0) + geom_line(aes(x=area, y=poptotal, fill="brown", linetype=dashed))# set se=FALSE to turnoff confidence bands
 plot(g)
 #Alternatively, you can summarise the number of points at each location and display that in some way, using geom_count(), geom_hex(), or geom_density2d().
 alpha
 ##########################################
 ## aesthetics 
+# values for different aesthetics
+#https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html
 x 
 y
 alpha
@@ -76,7 +79,6 @@ group
 shape
 size
 stroke
-
 #############################
 #Setting Plotting limits
 library(ggplot2)
@@ -134,13 +136,13 @@ plot(g1)
 
 # or
 
-g1 <- g1 + ggtitle("Area Vs Population1", subtitle="From midwest dataset1") + xlab("Area1") + ylab("Population1")
+g1 <- g1 + ggtitle("Area Vs Population1", subtitle="From midwest dataset1") + xlab("Area1") + ylab("Population1") 
 plot(g1)
 ######################################
 ### Changing Color and Size
 library(ggplot2)
 g <- ggplot(midwest, aes(x=area, y=poptotal)) +
-  geom_point(col="yellow", size=3) +   # Set static color and size for points
+  geom_point(col="blue", shape="diamond open", size=3) +   # Set static color and size for points
   geom_smooth(method="auto", col="firebrick") +  # change the color of line
   coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
   labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
@@ -150,8 +152,8 @@ plot(g)
 #changing various Methods 
 library(ggplot2)
 ggplot(midwest, aes(x=area, y=poptotal)) +
-  geom_point(col="yellow", size=3) +   # Set static color and size for points
-  geom_smooth(method="glm", col="firebrick") +  # change the color of line
+  geom_point(col="red", size=3, shape="bullet") +   # Set static color and size for points
+  geom_smooth(method="loess", col="firebrick") +  # change the color of line
   coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
   labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
 
@@ -174,11 +176,15 @@ gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
 plot(gg)
 #########################################
 gg <- gg + theme(legend.position="None")  # remove legend
+plot(gg)
 gg <- gg + theme(legend.position="left")
+plot(gg)
 gg <- gg + theme(legend.position="right")
+plot(gg)
 gg <- gg + theme(legend.position="top")
+plot(gg)
 gg <- gg + theme(legend.position="bottom")
-
+plot(gg)
 plot(gg)
 
 gg <- gg + scale_colour_brewer(palette = "set1", direction = 1)  # change color palette #palette fro 1 to 1024
@@ -207,7 +213,7 @@ gg <- gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01))
 gg <- gg + scale_y_continuous(breaks=seq(0, 1000000, 200000))
 plot(gg)
 #################
-#Changing Labels
+#Changing X and Y Scale
 # Base Plot
 gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
   geom_point(aes(col=state), size=3) +  # Set color to vary based on state categories.
@@ -216,7 +222,11 @@ gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
   labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
 
 # Change breaks + label
+gg <- gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01))
+plot(gg)
 gg <- gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01), labels = month.abb[1:11])
+plot(gg)
+gg <- gg + scale_y_continuous(breaks=seq(0, 1000000, 50000))
 plot(gg)
 gg <- gg + scale_y_continuous(breaks=seq(0, 1000000, 250000), labels = letters[1:5])
 plot(gg)
@@ -252,7 +262,21 @@ gg + theme_classic() + labs(subtitle="Classic Theme")
 gg1 <- gg + theme(panel.background = element_rect(fill = "white", colour = "blue"))
 plot(gg1)
 gg + theme(panel.border = element_rect(linetype = "dashed", fill = NA))
-gg + theme(panel.grid.major = element_line(colour = "black"))
+gg + theme(panel.grid.major = element_line(colour = "yellow"))
 #geom_bar
 gg <- gg + geom_bar(position = "fill")
 plot(gg)
+
+
+
+library(plotly)
+x <- c(1:100)
+random_y <- rnorm(100, mean = 0)
+data <- data.frame(x, random_y)
+
+p <- plot_ly(data, x = ~x, y = ~random_y, type = 'scatter', mode = 'lines')
+
+# Create a shareable link to your chart
+# Set up API credentials: https://plot.ly/r/getting-started
+chart_link = api_create(p, filename="line-basic")
+chart_lin

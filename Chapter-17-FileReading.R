@@ -26,7 +26,7 @@ data <- read.csv("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/msft.csv", heade
 
 # Load a CSV file that doesn't have headers
 data <- read.csv("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/iris.csv", header=TRUE)
-#numerical header is converted in string by appendign a character
+#numerical header is converted in string by appending a character
 data <- read.csv("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/iris.csv", header=TRUE)
 
 #with colon separated
@@ -51,7 +51,8 @@ data <- read.delim("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/msft.csv",head
 data <- read.csv(file.choose())
 #Read the strings of data as strings instead of Factors
 data <- read.csv("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/iris.csv", header=FALSE, stringsAsFactors=TRUE)
-#col.names 
+#data.col.names 
+data.v5
 col_names = c("col1","COL2","col3","COL4","5thcol","6thcol","7thcol")
 data <- read.delim("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/msft_tab.csv",header=FALSE,col.names = col_names)
 data <- read.delim("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/msft_tab.csv",header=TRUE,col.names = col_names)
@@ -80,7 +81,7 @@ data <- read.csv(filename)
 data <- read.csv(filename, quote = '"')
 data <- read.csv(filename, quote = "'")
 #fill 
-
+#fill unequal rows with blank fields
 data <- read.csv(filename, quote = '"')
 data <- read.csv(filename, quote = '"', fill = FALSE)
 filename = "C:/Users/balaji.arumugham/Documents/R_ML/R_ML/msft_extracol.csv"
@@ -106,8 +107,8 @@ write.csv(data, "c:\\Test\\helloworld.txt",sep=" ")
 #list.files(tempdir())
 write.table(iris,file=tempfile())
 #tempdir()
-file_list = list.dirs("C:\\")#recursive = TRUE by default
-
+file_list = list.dirs("C:\\Test\\")#recursive = TRUE by default
+file_list = list.dirs("C:\\Program Files (x86)")
 #Function	Description
 #list.files	Lists files in a directory.#recursive = FALSE by default
 files_list = list.files("c:\\Test\\")
@@ -116,13 +117,14 @@ files_list = list.files("C:\\Source\\PythonDSML", pattern ="*.csv",ignore.case =
 
 #list.dirs	Lists subdirectories of a directory.
 direc = list.dirs("C:\\Source\\PythonDSML",  recursive = TRUE,full.names = TRUE)
-
+print(direc)
 #file.exists	Tests whether a specific file exists in a location.
 file_exists = file.exists("C:\\Source\\PythonDSML\\PythonPandas/Pandas2ndLevel/data/msft_modified_01.csv")
 
 #file.create	Creates a file.
 file.create("C:\\Source\\PythonDSML\\PythonPandas/Pandas2ndLevel/data/msft_modified_21.csv")
 
+file.exists("C:\\Source\\PythonDSML\\PythonPandas/Pandas2ndLevel/data/msft_modified_21.csv")
 
 #file.remove	Deletes files (and directories in Unix operating systems).
 

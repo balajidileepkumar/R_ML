@@ -38,106 +38,6 @@ charv <- c("o","it","the","it","it")
 # Calculate the mode using the user function.
 result <- getmode(charv)
 print(result)
-#########################################################
-#Linear
-#########################################################
-#lm is used to fit linear models. It can be used to carry out regression, single stratum analysis of variance and analysis of covariance 
-#y = mx + c
-#c -> intercept
-#m -> slope/gradient
-
-x1 <- c(151, 
-        174, 138, 186, 128, 136, 179, 163, 152, 131)
-y1 <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
-# Apply the lm() function.
-relation <- lm(y1~x1)
-print(class(relation))
-methods(class=class(relation))
-methods(class = "lm")
-
-summary(relation)
-show(relation)
-#anova(relation)
-print(relation)
-plot(relation)
-
-#########################################################
-#Multiple Linear Regression
-#########################################################
-mtcars
-
-mtcars
-input <- mtcars[,c("mpg","disp","hp","wt")]
-input
-print(head(input,20))
-print(tail(input))
-
-
-input <- mtcars[,c("mpg","disp","hp","wt")]
-
-# Create the relationship model.
-model <- lm(wt~disp+hp+mpg, data = input)
-methods(class=class(model))
-anova(model)
-model1 <- lm(mpg~disp+hp+wt, data = input)
-methods(class=class(model1))
-#Check the models plot
-plot(model1, type="b", main="multiple linear regression", sub="second", xlab="hp+wt+disp",ylab="mpg")
-result = plot(model1)
-# Show the model.
-print(model)
-
-# Get the Intercept and coefficients as vector elements.
-cat("# # # # The Coefficient Values # # # ","\n")
-
-a <- coef(model)[1]
-print(a)
-
-Xdisp <- coef(model)[2]
-Xhp <- coef(model)[3]
-Xwt <- coef(model)[4]
-
-print(Xdisp)
-print(Xhp)
-print(Xwt)
-#########################################################
-#Logistic Regression
-#########################################################
-mtcars
-
-input <- mtcars[,c("am","cyl","hp","wt")]
-
-am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = binomial)
-
-am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = gaussian)
-
-
-#binomial(link = "logit")
-#gaussian(link = "identity")
-#Gamma(link = "inverse")
-#inverse.gaussian(link = "1/mu^2")
-#poisson(link = "log")
-#quasi(link = "identity", variance = "constant")
-#quasibinomial(link = "logit")
-#quasipoisson(link = "log"
-
-print(summary(am.data))
-#In statistics, deviance is a goodness-of-fit statistic for a statistical model; it is often used for statistical hypothesis testing.
-
-#The null deviance shows how well the response is predicted by the model with 
-#nothing but an intercept.
-
-#The residual deviance shows how well the response is predicted by the model when 
-#the predictors are included.
-
-
-#input
-#xtest = input[0,5]
-#xtest
-#summary(logistic)
-#Predict Output
-show(am.data)
-
 
 #########################################################
 #Normal Distribution
@@ -146,7 +46,7 @@ show(am.data)
 x <- seq(-10,10,by = .2)
 x
 # Choose the mean as 2.5 and standard deviation as 2.
-y <- pnorm(x, mean = 2.5, sd = 2)
+y <- pnorm(x, mean = 1.5, sd = 1)
 y
 # Give the chart file a name.
 png(file = "pnorm.png")
@@ -194,11 +94,114 @@ plot(x)
 x <- rbinom(8,150,.4)
 print(x)
 #########################################################
+#Linear
+#########################################################
+#lm is used to fit linear models. It can be used to carry out regression, single stratum analysis of variance and analysis of covariance 
+#y = mx + c
+#c -> intercept
+#m -> slope/gradient
+
+x1 <- c(151,  174, 138, 186, 128, 136, 179, 163, 152, 131)
+y1 <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+# Apply the lm() function.
+relation <- lm(y1~x1)
+print(class(relation))
+methods(class=class(relation))
+methods(class = "lm")
+summary(relation)
+show(relation)
+#anova(relation)
+print(relation)
+plot(relation)
+
+#########################################################
+#Multiple Linear Regression
+#########################################################
+mtcars
+
+mtcars
+input <- mtcars[,c("mpg","disp","hp","wt")]
+input
+print(head(input,20))
+print(tail(input))
+
+
+input <- mtcars[,c("mpg","disp","hp","wt")]
+
+# Create the relationship model.
+model <- lm(wt~disp+hp+mpg, data = input)
+methods(class=class(model))
+#anova(model)
+model1 <- lm(mpg~disp+hp+wt, data = input)
+methods(class=class(model1))
+#Check the models plot
+plot(model1, type="b", main="multiple linear regression", sub="second", xlab="hp+wt+disp",ylab="mpg")
+result = plot(model1)
+# Show the model.
+print(model)
+
+# Get the Intercept and coefficients as vector elements.
+cat("# # # # The Coefficient Values # # # ","\n")
+
+a <- coef(model)[1]
+print(a)
+
+Xdisp <- coef(model)[2]
+Xhp <- coef(model)[3]
+Xwt <- coef(model)[4]
+
+print(Xdisp)
+print(Xhp)
+print(Xwt)
+#########################################################
+#Logistic Regression
+#########################################################
+mtcars
+
+input <- mtcars[,c("am","cyl","hp","wt")]
+
+#generalized linear model
+
+am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = binomial)
+#	a description of the error distribution and link function to be used in the model.
+#For glm this can be a character string naming a family function, a family function 
+#or the result of a call to a family function. For glm.fit only the third option is
+#supported. (See family for details of family functions.)
+
+am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = gaussian)
+
+
+#binomial(link = "logit")
+#gaussian(link = "identity")
+#Gamma(link = "inverse")
+#inverse.gaussian(link = "1/mu^2")
+#poisson(link = "log")
+#quasi(link = "identity", variance = "constant")
+#quasibinomial(link = "logit")
+#quasipoisson(link = "log"
+
+print(summary(am.data))
+#In statistics, deviance is a goodness-of-fit statistic for a statistical model; it is often used for statistical hypothesis testing.
+
+#The null deviance shows how well the response is predicted by the model with 
+#nothing but an intercept.
+
+#The residual deviance shows how well the response is predicted by the model when 
+#the predictors are included.
+
+
+#input
+#xtest = input[0,5]
+#xtest
+#summary(logistic)
+#Predict Output
+show(am.data)
+#########################################################
 #Decision Tree
 #########################################################
 if (!"randomForest" %in% rownames(installed.packages())) {install.packages("randomForest")}
 if (!"party" %in% rownames(installed.packages())) {install.packages("party")}
-
+                                                                                                                                                                                                                                                                                                                                                      
 #install.packages("party")
 #ctree(formula, data)
 # Load the party package. It will automatically load other
@@ -206,9 +209,12 @@ if (!"party" %in% rownames(installed.packages())) {install.packages("party")}
 
 library(party)
 readingSkills
+nrow(readingSkills)
+ncol(readingSkills)
 # Print some records from data set readingSkills.
 print(head(readingSkills))
 print(head(readingSkills,10))
+print(tail(readingSkills))
 print(tail(readingSkills,20))
 
 # Load the party package. It will automatically load other
@@ -230,25 +236,130 @@ output.tree <- ctree(
 plot(output.tree)
 show(output.tree)
 
-airq <- subset(airquality, !is.na(Ozone))
-airct <- ctree(Ozone ~ ., data = airq)
-plot(airct)
-# Create the tree.
-output.tree1 <- ctree(
-  nativeSpeaker ~ shoeSize + score,
-  data = input.dat)
-
-# Plot the tree.
-plot(output.tree1)
-
-# Create the tree.
+# Create the 2nd tree.
 output.tree2 <- ctree(
   nativeSpeaker ~  score,
   data = input.dat)
 plot(output.tree2)
 
+# Create the tree.
+output.tree3 <- ctree(
+  nativeSpeaker ~ shoeSize + score,
+  data = input.dat)
+
+# Plot the tree.
+plot(output.tree3)
+
+
+####### Airquality Dataset
+airquality
+ncol(airquality)
+nrow(airquality)
+names(airquality)
+
+airq <- subset(airquality, !is.na(Ozone))
+nrow(airq)
+
+airct1 <- ctree(Ozone ~ ., data = airq)
+plot(airct1)
+
+airct2 <- ctree(Ozone ~ Temp + Wind + Day, data = airq)
+plot(airct2)
+
+airq[1,1:6]
+a <- airq[1,2:6]
+print(a, typeof(a))
+predict(airct1, a)
+
+b <- airq[1:3,2:6]
+print(b, typeof(b))
+predict(airct1, b)
+
+newtestdata = list(Solar.R=as.integer(190), Wind=7.4,  Temp=as.integer(67), Month=as.integer(5), Day=as.integer(1))
+predict(airct1, newtestdata)
+
 # Save the file.
 dev.off()
+########################################################
+##################################################################################################################
+# Starting with Simple Learners
+
+## Growing Greedy Classification Trees
+## Tree Pruning
+weather <- expand.grid(Outlook = c("Sunny","Overcast","Rain"),
+                       Temperature = c("Hot","Mild","Cool"), 
+                       Humidity=c("High","Normal"),Wind=c("Weak","Strong"))
+typeof(weather)
+response <- c(1, 19, 4, 31, 16, 2, 11, 23, 35, 6, 24, 15, 18, 36)
+play <- as.factor(c("No", "No", "No", "Yes", "Yes", "Yes", "Yes",
+                    "Yes", "Yes", "Yes", "No", "Yes", "Yes", "No"))
+tennis <- data.frame(weather[response,],play)
+tennis
+#################
+if (!"rpart" %in% rownames(installed.packages())) {install.packages("rpart")}
+library(rpart)
+tennis_tree <- rpart(play ~ ., data=tennis, method="class", parms=list(split="information"), control=rpart.control(minsplit=1))
+
+# Printing the rules behind the decision tree
+print(tennis_tree)
+plot(tennis_tree)
+# Plotting the structure of the tree
+if (!"rpart.plot" %in% rownames(installed.packages())) {install.packages("rpart.plot")}
+library(rpart.plot)
+prp(tennis_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+prp(tennis_tree, type=0, extra=2, under=TRUE, compress=TRUE)
+prp(tennis_tree, type=0, extra=3, under=TRUE, compress=TRUE)
+
+prp(tennis_tree, type=1, extra=1, under=TRUE, compress=FALSE)
+prp(tennis_tree, type=2, extra=1, under=TRUE, compress=FALSE)
+prp(tennis_tree, type=3, extra=1, under=TRUE, compress=FALSE)
+prp(tennis_tree, type=4, extra=1, under=TRUE, compress=FALSE)
+
+#########################################################################################
+### Pruning Overgrown Trees
+if (!"klaR" %in% rownames(installed.packages())) {install.packages("klaR")}
+if (!"klaR" %in% rownames(installed.packages())) {install.packages("klaR")}
+
+data(Titanic, package = "datasets")
+dataset <- as.data.frame(Titanic)
+dataset
+library(rpart)
+titanic_tree <- rpart(Survived ~ Class + Sex + Age, data=dataset, weights=Freq,
+                      method="class", parms=list(split="information"), control=rpart.control(minsplit=5))
+
+prp(titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+prp(titanic_tree, type=1, extra=1, under=TRUE, compress=TRUE)
+prp(titanic_tree, type=2, extra=1, under=TRUE, compress=TRUE)
+
+prp(titanic_tree, type=0, extra=2, under=TRUE, compress=TRUE)
+prp(titanic_tree, type=0, extra=3, under=TRUE, compress=TRUE)
+
+# Prints a table on frequency of survival
+print(aggregate(Freq ~ Survived, data = dataset, sum))
+# Prints a table on frequency of survival
+print(aggregate(Freq ~ Age , data = dataset, sum))
+print(aggregate(Freq ~ Sex + Age , data = dataset, sum))
+
+# First we print the unpruned solution
+library(rpart.plot)
+prp(titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+
+# Pruning the tree and representing it
+#Complexity parameter to which the rpart object will be trimmed.
+pruned_titanic_tree <- prune(titanic_tree, cp=0.02)
+prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+
+pruned_titanic_tree <- prune(titanic_tree, cp=0.05)
+prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+
+pruned_titanic_tree <- prune(titanic_tree, cp=0.04)
+prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+
+pruned_titanic_tree <- prune(titanic_tree, cp=1)
+prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
+
+pruned_titanic_tree <- prune(titanic_tree, cp=0.3)
+prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
 #########################################################
 #Random Forest
 #########################################################
@@ -289,14 +400,47 @@ y
 if (!"e1071" %in% rownames(installed.packages())) {install.packages("e1071")}
 installed.packages("e1071")
 
-svm_model <- svm(Species ~ ., data=iris)
+#C-classification
+#nu-classification
+#one-classification (for novelty detection)
+#eps-regression
+#nu-regression
+
+svm_model <- svm(Species ~ ., data=iris, type="C-classification")
+allmethods = showMethods(class(svm_model))
 summary(svm_model)
-plot(x,y)
+#kernel
+#linear
+#polynomial
+#radial
+#sigmoid
+svm_model <- svm(Species ~ ., data=iris, type="C-classification", kernel="radial")
+plot(svm_model, iris, Petal.Width ~ Petal.Length,
+     slice = list(Sepal.Width = 3, Sepal.Length = 4))
+########
+plot(svm_model, iris, Species ~ ., fill = TRUE, grid = 50, slice = list(Sepal.Width = 3, Sepal.Length = 4),
+     symbolPalette = palette(), svSymbol = "x", dataSymbol = "o")
+
+#########################################################
+data(iris)
+m2 <- svm(Species~., data = iris)
+plot(m2, iris, Petal.Width ~ Petal.Length,slice = list(Sepal.Width = 3, Sepal.Length = 4))
 #########################################################
 svm_model1 <- svm(x,y)
 summary(svm_model1)
+#Column Names
+names(a)
 pred <- predict(svm_model1,a)
 pred
+#########################################################
+a["Sepal.Length"] = 5.2
+a["Sepal.Width" ] = 2.9
+a["Petal.Length"] = 3.9
+a["Petal.Width" ] = 1.7
+
+pred <- predict(svm_model1,a)
+pred
+
 system.time(pred <- predict(svm_model1,x))
 #########################################################
 #if (!"rpart" %in% rownames(installed.packages())) {install.packages("rpart")}
@@ -308,43 +452,46 @@ system.time(pred <- predict(svm_model1,x))
 #Predict Output
 
 #########################################################
-if (!"rpart" %in% rownames(installed.packages())) {install.packages("rpart")}
-library(rpart)
-x <- cbind(x_train,y_train)
-# grow tree
-fit <- rpart(y_train ~ ., data = x,method="class")
-summary(fit)
-#Predict Output
-#predicted= predict(fit,x_test)
-
-#########################################################
+#The Naive Bayes named due to its extreme simplifications to the standard probability classifications
+#It was formulated by Reverend Thomas Bayes
+#The Theorem was introducing the idea of conditionaly probability
+#P(A/B) = P(B/A)*P(A)/P(B)
 if (!"e1071" %in% rownames(installed.packages())) {install.packages("e1071")}
 library(e1071)
 library(datasets)
-library(e1071)
-library(rpart)
+#library(rpart)
+#Types
+#Gaussian naive Bayes
+#Multinomial naive Bayes
+#Bernoulli naive Bayes
+
 #UCI_data_URL <- getURL('https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data')
-breast_cancer_data <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header = FALSE)
-#breast_cancer_data <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header = TRUE)
-breast_cancer <- as.matrix(breast_cancer_data )
-breast_cancer
-model <- naiveBayes(class ~ ., data = breast_cancer)
-model <- naiveBayes()
-class(model)
-summary(model)
-print(model)
+#breast_cancer_data <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header = FALSE)
+breast_cancer_data <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header = TRUE)
+breast_cancer_data <- read.csv("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/breastcancerwisconsin.csv", header = TRUE)
+file_exists = file.exists("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/breastcancerwisconsin.csv")
+nrow(breast_cancer_data)
+ncol(breast_cancer_data)
+model <- naiveBayes(diagnosis ~ ., data = breast_cancer_data)
+
+TestData <- breast_cancer_data[1,]
+nrow(TestData)
+ncol(TestData)
+typeof(TestData)
+predict(model, TestData)
+names(TestData)
+#newtestdata = list(Solar.R=as.integer(190), Wind=7.4,  Temp=as.integer(67), Month=as.integer(5), Day=as.integer(1))
 ##################################################################################################################
 #boston house pricing
 #https://archive.ics.uci.edu/ml/machine-learning-databases/housing/
 if (!"e1071" %in% rownames(installed.packages())) {install.packages("e1071")}
 library(e1071)
 library(datasets)
-library(e1071)
-library(rpart)
 library(MASS) 
 Boston
 typeof(Boston)
-Boston_matrix = as.matrix(Boston)
+#Boston_matrix = as.matrix(Boston)
+Boston_matrix = data.matrix(Boston)
 naive_model <- naiveBayes(medv ~ ptratio + age , data = Boston_matrix)
 class(naive_model)
 summary(naive_model)
@@ -354,93 +501,30 @@ methods(class=class(naive_model))
 print(naive_model)
 
 a <- Boston_matrix[1,c(7,11)]
+b <- Boston_matrix_1[1,c(7,11)]
 typeof(a)
+
 pred <- predict(naive_model,a)
+predict(naive_model,b)
 #testdata = list(list(55,14),list(77,20))
 #a[1]=55
 #a[2]=14
 
-##################################################################################################################
-# Starting with Simple Learners
-
-## Growing Greedy Classification Trees
-
-weather <- expand.grid(Outlook = c("Sunny","Overcast","Rain"),
-                       Temperature = c("Hot","Mild","Cool"), 
-                       Humidity=c("High","Normal"),Wind=c("Weak","Strong"))
-typeof(weather)
-response <- c(1, 19, 4, 31, 16, 2, 11, 23, 35, 6, 24, 15, 18, 36)
-play <- as.factor(c("No", "No", "No", "Yes", "Yes", "Yes", "Yes",
-                    "Yes", "Yes", "Yes", "No", "Yes", "Yes", "No"))
-tennis <- data.frame(weather[response,],play)
-tennis
-#################
-if (!"rpart" %in% rownames(installed.packages())) {install.packages("rpart")}
-library(rpart)
-tennis_tree <- rpart(play ~ ., data=tennis, method="class", parms=list(split="information"), control=rpart.control(minsplit=1))
-
-# Printing the rules behind the decision tree
-print(tennis_tree)
-plot(tennis_tree)
-# Plotting the structure of the tree
-if (!"rpart.plot" %in% rownames(installed.packages())) {install.packages("rpart.plot")}
-library(rpart.plot)
-prp(tennis_tree, type=0, extra=1, under=TRUE, compress=TRUE)
-prp(tennis_tree, type=0, extra=2, under=TRUE, compress=TRUE)
-prp(tennis_tree, type=0, extra=3, under=TRUE, compress=TRUE)
-
-prp(tennis_tree, type=1, extra=1, under=TRUE, compress=TRUE)
-prp(tennis_tree, type=2, extra=2, under=TRUE, compress=TRUE)
-prp(tennis_tree, type=3, extra=1, under=TRUE, compress=TRUE)
-prp(tennis_tree, type=4, extra=1, under=TRUE, compress=TRUE)
-
-#########################################################################################
-### Pruning Overgrown Trees
-if (!"klaR" %in% rownames(installed.packages())) {install.packages("klaR")}
-if (!"klaR" %in% rownames(installed.packages())) {install.packages("klaR")}
-
-data(Titanic, package = "datasets")
-dataset <- as.data.frame(Titanic)
-dataset
-library(rpart)
-titanic_tree <- rpart(Survived ~ Class + Sex + Age, data=dataset, weights=Freq,
-                      method="class", parms=list(split="information"), control=rpart.control(minsplit=5))
-
-prp(titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
-prp(titanic_tree, type=0, extra=2, under=TRUE, compress=TRUE)
-prp(titanic_tree, type=0, extra=3, under=TRUE, compress=TRUE)
-
-# Prints a table on frequency of survival
-print(aggregate(Freq ~ Survived, data = dataset, sum))
-# Prints a table on frequency of survival
-print(aggregate(Freq ~ Age , data = dataset, sum))
-print(aggregate(Freq ~ Sex + Age , data = dataset, sum))
-
-# First we print the unpruned solution
-library(rpart.plot)
-prp(titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
-
-# Pruning the tree and representing it
-pruned_titanic_tree <- prune(titanic_tree, cp=0.02)
-pruned_titanic_tree <- prune(titanic_tree, cp=0.03)
-pruned_titanic_tree <- prune(titanic_tree, cp=0.04)
-pruned_titanic_tree <- prune(titanic_tree, cp=1)
-pruned_titanic_tree <- prune(titanic_tree, cp=0.3)
-prp(pruned_titanic_tree, type=0, extra=1, under=TRUE, compress=TRUE)
 
 ## Taking a Probabilistic Turn
 #########################################################################################
 ### Estimating response with Naïve Bayes
-
+#### Error in Data
 if (!"klaR" %in% rownames(installed.packages())) {install.packages("klaR")}
 if (!"kernlab" %in% rownames(installed.packages())) {install.packages("kernlab")}
-if (!"e1071" %in% rownames(installed.packages())) {install.packages("e1071")}
 library(klaR)
 library(kernlab)
 data(spam)
 tail(spam,10)
-head(spam)
 head(spam,50)
+names(spam)
+
+result = subset(spam, type == "nonspam")
 
 data(spam, package = "kernlab")
 data(spam, package = "kernlab")
@@ -496,7 +580,11 @@ dimnames(mat) <- list(paste("Sample", 1:4), paste("Var", 1:5))
 #It is a decomposition technique, which is used to reduce the no of components
 myPCA <- prcomp(mat, scale. = T, center = F)
 myPCA$rotation # loadings
+
+myPCA <- prcomp(Boston, scale. = T, center = F)
+myPCA$rotation # loadings
 myPCA$x # scores
+biplot(prcomp(Boston, scale = TRUE))
 ##################################################################################################################
 #Singular Value Decomposition
 #SVD is a decomposition technique, based on linear algebra
@@ -510,10 +598,13 @@ set.seed(101)
 mat_1 <- matrix(rnorm(30), 6, 5)
 mySVD <- svd(mat_1)
 diag(sigma) <- mySVD$d 
-
+#d-> diagonal matrix, contains the information about the process or operation applied
+#u -> has the actual no of columns and rows, contains the information about all the row values, it contains the 80percent of the data
+#v->square matrix -> original columns informations is preserved
 D <- diag(mySVD$d)
-dot.product(D,mySVD$u) 
-mySVD$v 
+#dot.product(D,mySVD$u) 
+#no of columns on the left of operation should be equal to no of rows on right
+(mySVD$u)%*%(D)%*%(mySVD$v)
 
 mySVD # the diagonal of Sigma mySVD$d is given as a vector
 sigma <- matrix(0,4,4) # we have 4 PCs, no need for a 5th column
@@ -530,6 +621,7 @@ mySVD <- svd(mat)
 mySVD # the diagonal of Sigma mySVD$d is given as a vector
 sigma <- matrix(0,4,4) # we have 4 PCs, no need for a 5th column
 diag(sigma) <- mySVD$d # sigma is now our true sigma matrix
+
 ##################################################################################################################
 wine <- read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data", sep=",")
 # Name the variables
@@ -545,6 +637,8 @@ legend("topright", bty = "n", legend = c("Cv1","Cv2","Cv3"), pch = 16, col = c("
 
 dev.off() # clear the format from the previous plot
 winePCA <- prcomp(scale(wine[,-1]))
+winePCA
+
 plot(winePCA$x[,1:2], col = wineClasses)
 wineOutlier <- wine
 wineOutlier[10,] <- wineOutlier[10,]*10 # change the 10th obs. into an extreme one by multiplying its profile by 10
@@ -568,6 +662,7 @@ head(df,5)
 table(df$treatment, df$improvement)
 result <- chisq.test(df$treatment, df$improvement, correct=FALSE)
 result
+#lower the value of p it's against the null hypothesis
 #########################################################
 if (!"MASS" %in% rownames(installed.packages())) {install.packages("MASS")}
 #Load the library.
@@ -576,13 +671,15 @@ library("MASS")
 #Cars93#########
 Cars93# Create a data frame from the main data set.
 head(Cars93)
+nrow(Cars93)
+ncol(Cars93)
+names(Cars93)
 car.data <- data.frame(Cars93$AirBags, Cars93$Type)
 unique(Cars93$Type)
 unique(Cars93$AirBags)
 # Create a table with the needed variables.
 car.data = table(Cars93$AirBags, Cars93$Type)
 print(car.data)
-iris
 # Perform the Chi-Square test.
 resultchi = chisq.test(car.data)
 print(resultchi)
@@ -597,7 +694,7 @@ result <- chisq.test(mtcars$carb, mtcars$cyl, correct=FALSE)
 #We have a high chi-squared value and a p-value of less that 0.05 significance level.
 #So we reject the null hypothesis and conclude that carb and cyl have a significant relationship.
 #########################################################
-#T-Test
+#T-Test/ student Test
 #########################################################
 #t-test: Comparing Group Means
 ###Performs one and two sample t-tests on vectors of data.#
@@ -612,12 +709,14 @@ library(gridExtra)      # provides side-by-side plotting
 #t.test(x, y = NULL, alternative = c("two.sided", "less", "greater"), mu = 0,
 #       paired = FALSE, var.equal = FALSE, conf.level = 0.95)
 ##########################################################
-  #The one-sample t-test compares a sample’s mean with a known value, when the variance of the population is unknown.
+#The one-sample t-test compares a sample  mean with a known value, when the variance 
+#of the population is unknown.
   #Mean of College educated adults is less
 ##########################################################
 if (!"gridExtra" %in% rownames(installed.packages())) {install.packages("gridExtra")}
 head(midwest)
-#x <- subset(iris, select=percollege)
+datamid = midwest
+#x <- subset(midwest, select=percollege)
 head(midwest$percollege, 10)
 
 summary(midwest$percollege)
@@ -636,28 +735,27 @@ library(dplyr)
 #"%>%" <- function(x,f) do.call(f,list(x))
 #http://www-eio.upc.edu/~pau/cms/rdata/doc/ggplot2/midwest.html
 df = select(filter(midwest,state == "OH" | state == "MI"),state, percollege)
-df1 = select(filter(midwest,state == "OH"),state, percollege)
-df2 = select(filter(midwest, state == "MI"),state, percollege)
+ohdf = select(filter(midwest,state == "OH"),state, percollege)
+michidf = select(filter(midwest, state == "MI"),state, percollege)
 nrow(df1)
 
 nrow(df2)
 nrow(df)
-#options(max.print=1000)
+options(max.print=1000)
 #?options
 print(df1)
 summary(df1)
 summary(df2)
 ggplot(df, aes(state, percollege)) + geom_boxplot()
-result  = t.test(df1$percollege,df2$percollege)
+result  = t.test(ohdf$percollege,michidf$percollege)
+
 result  = t.test(percollege ~ state, data = df)
+result  = t.test(percollege ~ state, data = midwest)
 #Cross Verify
 mean(df1$percollege)
 mean(df2$percollege)
 summary(result)
 ##########################################################
-head(mtcars)
-t.test(mtcars$hp,mtcars$gear)
-head(mtcars)
 result = t.test(iris$Petal.Length,iris$Petal.Width)
 summary(result)
 ##########################################################
@@ -683,6 +781,7 @@ show(plant.mod1)
 #methods(plant.mod1)
 
 result = anova(plant.mod1)
+aov(weight ~ group,data = plant.df)
 library(stats)
 residuals(plant.mod1)
 fitted(plant.mod1)
@@ -731,23 +830,27 @@ abline(v=3.5, col = "red",lty=1)
 x10 <- c()
 k =10
 for ( i in 1:k) {
-  x10[i] = mean(sample(1:6,i, replace = TRUE))}
+  TakenSample = sample(1:6,i*100, replace = TRUE)
+  print(length(TakenSample))
+  x10[i] = mean(TakenSample)}
+   
 hist(x10, col ="pink", main="Sample size =10",xlab ="Outcome of die roll")
 abline(v = mean(x10), col = "Red")
 abline(v = 3.5, col = "blue")
+for ( i in 1:k) {
+  print(i)
+}
 ##########################################################
 myRandomVariables<-rbeta(1000,5,2)*10
 n<-100
-samplesize<-30
+samplesize<-10
 xbar <- rep(NA,n)
 for  (i in 1:n){
-  samplesize = samplesize + 30
+  samplesize = samplesize + 10
   mysamp <- sample(myRandomVariables,size = samplesize,replace =TRUE)
   xbar[i] <- mean(mysamp)
 }
 hist(xbar[i], col ="pink", main="Sample size =30",xlab ="Outcome of randomsamples")
 abline(v = mean(x10), col = "Red")
 abline(v = 3.5, col = "blue")
-
 ##########################################################
-

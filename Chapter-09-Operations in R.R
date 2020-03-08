@@ -20,6 +20,7 @@ print(a_vector ^ b_vector)#Power of Second element
 print(a_vector / b_vector)#Divide Operation
 print(a_vector %% b_vector)#Gives Remainder Value
 print(a_vector %/% b_vector)#Gives Quotient
+5^4
 #for instance
 ####
 c_vector <- c(1,7,12)

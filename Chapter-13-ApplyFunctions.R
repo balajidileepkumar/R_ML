@@ -76,6 +76,7 @@ mean_list = lapply(data, mean)
 typeof(mean_list)
 
 median_vect = sapply(data,FUN= median)
+typeof(median_vect)
 print(class(median_vect))
 
 mylist <- list(data_a,data_b,data_c)
@@ -108,22 +109,32 @@ res = mapply(rep,1:4,1:2)
 library(datasets)
 mtcars
 
+no_of_rows =nrow(mtcars)
+no_of_col =ncol(mtcars)
 library("magrittr")
 library("dplyr")
 
-result = subset(mtcars, mtcars$cyl == 8) %>% select(wt) %>% sum()
-result = subset(mtcars, mtcars$cyl == 8) %>% select(wt) %>% length()
+result_total = subset(mtcars, mtcars$cyl == 6) %>% select(wt) %>% sum()
+total_selected_rows = nrow(subset(mtcars, mtcars$cyl == 6))
+result_total/total_selected_rows
 
 result = tapply(mtcars$wt,mtcars$cyl,mean)
 
 result = tapply(mtcars$cyl,mtcars$wt,mean)
+
+result = subset(mtcars, mtcars$cyl == 8) %>% select(wt) %>% nrow()
+
+result = subset(mtcars, mtcars$cyl == 6) %>% select(wt) %>% nrow()
+
+result = subset(mtcars, mtcars$cyl == 4) %>% select(wt) %>% nrow()
+
 result
 res = mapply(rep,1,1:4)
+
 #R apply 
 # Recursive apply
 x = list(1,2,3,4)
 rapply_result = rapply(x,function(x){x+2})
-
 lapply(x,function(x){x+2})
 
 rapply_result = rapply(x,function(x){x+2},class=c("numeric"))

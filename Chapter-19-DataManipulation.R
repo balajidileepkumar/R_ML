@@ -43,11 +43,11 @@ result = left_join(df_primary, df_secondary, by = c("y"="y"), suffix = c(" From 
 
 result = left_join(df_primary, df_secondary, by = c("y"="y"), copy= TRUE, suffix = c(" From Primary", " From Secondary"))
 
-result = left_join(df_primary, df_secondary, by = c("y"="y"), copy= TRUE, suffix = c(" From Primary", " From Secondary"))
+result = left_join(df_primary, df_secondary, by = c("y"="y"), copy= TRUE, suffix = c(" From Primary", " From Secondary"),keep=TRUE)
 
 result_1 = left_join(result,df_secondary, by = c("y"="y"), suffix =c(" table1"," table2"), keep = TRUE)
 
-result_1 = right_join(result,df_secondary, by = c("y"="y"), suffix =c(" table1"," table2"), keep = TRUE)
+result_1 = right_join(df_primary,df_secondary, by = c("y"="y"), suffix =c(" table1"," table2"), keep = TRUE)
 
 right_join(result,df_secondary, by = c("y"="y"), suffix =c(" table1"," table2"), keep = TRUE)
 
@@ -68,14 +68,16 @@ result_nestjoin = nest_join(df_primary, df_secondary, by = c("y"="y"), copy= TRU
 #Data Cleansing
 
 iris
-tail(iris,5)
+tail(iris,50)
+head(iris)
 
 
 #Filter, Aggregate, Select, Group_by, Arrange, mutate
 
-add <- function(x) Reduce("-", x)#Reduce a list to a single value by iteratively applying a binary function
-add <- function(x) Reduce("-", x)#Reduce a list to a single value by iteratively applying a binary function
+sub <- function(x) Reduce("-", x)#Reduce a list to a single value by iteratively applying a binary function
+add <- function(x) Reduce("+", x)#Reduce a list to a single value by iteratively applying a binary function
 add(list(1, 2, 3))
+sub(list(1, 2, 3))
 #########################################
 
 iris
@@ -86,13 +88,15 @@ dimnames(iris)
 #glimpse(df)
 #FILTER
 result_data = filter(iris,Species == "setosa")
+nrow(result_data)
+head(result_data)
+result_data = filter(iris,Species == "setosa",Sepal.Length >= 5)
 
 result_data = filter(iris, Petal.Length >= 2.0)
 
 result_data = filter(iris, Sepal.Length >= 5, Petal.Length >= 5)
 
 filter(iris, Sepal.Length >= 5, Petal.Length >= 4) %>% select(Sepal.Length, Sepal.Width) 
-select_result = select(filter(iris, Sepal.Length >= 5, Petal.Length >= 4))
 
 #pipe line
 library("tidyverse")
@@ -125,7 +129,8 @@ nrow(mtcars)
 ncol(mtcars)
 
 result <- group_by(mtcars, cyl)
-
+head(mtcars,10)
+head(result,20)
 result <- group_by(mtcars, gear)
 nrow(result)
 
@@ -145,6 +150,11 @@ Flower <- group_by(iris,Species) %>% ungroup() %>% summarise(result = mean(Petal
 #arrange
 result <- group_by(iris, Sepal.Length) %>% arrange(.,Sepal.Length)
 
+result <- group_by(iris, Species) %>% arrange(.,Sepal.Length)
+
+result <- group_by(mtcars, cyl) %>% arrange(.,gear, .by_group =FALSE)
+
+result <- group_by(mtcars, cyl) %>% arrange(.,gear, .by_group =TRUE)
 
 #arrange order by column asc
 select(iris,Petal.Length,Species) %>% arrange(.,Petal.Length)
@@ -173,11 +183,14 @@ PetalLengthMedian_value <- summarise(iris, median(Petal.Length))
 summarise(mtcars, mean(mpg, na.rm = TRUE))
 
 #aggregate
-#Splits the data into subsets, computes summary statistics for each, 
+#Splits the data into subsets, computes summary statistics for each column, 
 #and returns the result in a convenient form.
-aggregate(iris, Sepal.Length)
+result = aggregate(iris, Sepal.Length)
 
-aggregate(iris, by = list(iris$Sepal.Length), FUN = mean)
+result = aggregate(iris, by = list(iris$Sepal.Length), FUN = mean)
+nrow(result)
+
+result = aggregate(iris, by = list(iris$Species), FUN = mean)
 
 iris %>% aggregate(list(Sepal.Length), FUN = sum)
 
@@ -192,6 +205,6 @@ aggregate(iris, list(iris$Petal.Length), mean)
 mtcars$cyl
 
 #subset
-subset(iris, Petal.Length >5)
-
+result = subset(iris, Petal.Length >5)
+nrow(result)
 

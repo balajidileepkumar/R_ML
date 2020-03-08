@@ -1,8 +1,10 @@
 #Data Types in R
 #Primary
  #character
- #double
- #complex
+ #Numeric
+    #double
+    #complex
+    #integer 
  #logical
 
 #Secondary
@@ -19,6 +21,7 @@
 #it's single in dimension
 vector_numerical = c(6,7,8+2i)
 vector_numerical[1]
+
 #pi
 #typeof operator is used determine the type of the object
 typeof(vector_numerical) # [1] "double"
@@ -36,7 +39,7 @@ typeof(vector_complex) # Result  [1] "complex"
 #Combining Vectors
 m =c(6,7,8,9)
 typeof(m)
-n =c(1,2,3,4,5)
+n =c(1,2,3,4,5,6)
 typeof(n)
 
 o = c(m,n)
@@ -65,9 +68,10 @@ a*b #Multiply # Result [1]  4 10 18 28 20
 a+b #Add # Result [1]  5  7  9 11  9
 a-b #Subtract Result [1] -3 -3 -3 -3  1
 b-a #Subtract Result [1]  3  3  3  3 -1
+a%/%b#integer quotient 
+
 a/b #Divide Result [1] 0.2500000 0.4000000 0.5000000 0.5714286 1.2500000
 a%%b #Modulus Result [1] 1 2 3 4 1
-a%/%b#integer quotient 
 b%%a #Modulus Result [1] 0 1 0 3 4
 b%/%a
 #Here the vector with shortest length is recycled to match the vector with higher length to perform the arithmetic operation.
@@ -98,6 +102,7 @@ x&&y
 x <- c(0,0, TRUE, FALSE,2+2i)
 y <- c(1,0, FALSE, FALSE,2+3i)
 x | y #Result  [1]  TRUE FALSE  TRUE FALSE  TRUE
+x||y
 #Element Wise Not Operation
 #Provides Negated value for each element in a vector
 x <- c (FALSE, 3,0, TRUE, 2+2i)

@@ -7,7 +7,7 @@ typeof(a)
 x = as.integer(a)
 typeof(x)
 is.integer(a)
-b <<- 2.0 
+b <- 2.0 
 typeof(b)
 a + b -> c
 20 + a -> c
@@ -49,6 +49,7 @@ as.logical(e)
 
 #install any library
 install.packages("nutshell")
+installed.packages
 
 typeof(c)
 #10 k
@@ -69,9 +70,11 @@ typeof(b)
 ls() # list out all the variables available for coding
 
 #class(x) - lists out what's the class of the given type of data
+b
 typeof(b)
-class(a)
+class(b)
 
+d
 typeof(d)
 class(d)
 

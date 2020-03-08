@@ -1,6 +1,6 @@
 ## Conditional and Block statements 
 a = 10 
-b = 10
+b = 110
 #if(a >b) { print(a) } else {  print(b) }
 
 if(a>b)
@@ -50,7 +50,7 @@ V <- LETTERS
 month_abb <- month.abb 
 months_name <- month.name
 letters
-
+vowels = c('a','e','i','o','u')
 for(x in V)
 {
   print(x)

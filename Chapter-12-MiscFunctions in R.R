@@ -40,31 +40,43 @@ repeatedvalues_fun_seq_times = rep(seq(5,15,by=3),times = 3)
 print(repeatedvalues_fun_seq_times)
 
 x = c(1,1,1,3,4,5,5,6,2,2,2)
+#unique
 y_unique = unique(x)
 print(y_unique)
+#duplicated
 y_duplicated = duplicated(x)
 print(y_duplicated)
+x[y_duplicated]
 print(class(y_duplicated))
 print(y_duplicated)
 #x[!y_duplicated]
 print(!y_duplicated)
 unique_using_duplicated = x[!y_duplicated]
 print(unique_using_duplicated)
-#dplyr::distinct(x,TRUE)
+#dplyr distinct
+#dplyr::distinct_(x,TRUE)
 
 #sort[x]
+sort(x,decreasing = FALSE)#decreasing -> descending order
+sort(x)
+
+sort(x, TRUE)
+
+#ORDER 
+x <- c(2,4,6,1,2,3)
+order(x)
+
+
+x <- c(2,4,6,1,2,3)
+order(x, decreasing = TRUE)
+order(-x)
+
+
 
 x =20
 
 "%>%" <- function(x,f) do.call(f,list(x))
-pi %>% sin
-sin(pi)
-cos(sin(pi))
-tan(cos(sin(pi)))
-tan(1)
 
-cos(sin(0))
-tan(cos(sin(0)))
 # Perform the same computations on `x` as above
 x %>% log() %>%
   diff() %>%
