@@ -649,7 +649,8 @@ plot(outlierPCA$x[,1:2], col = wineClasses)
 #A chi-squared test, also written as χ² test, is any statistical hypothesis test where
 #the sampling distribution of the test statistic is a chi-squared distribution when the
 #null hypothesis is true
-  #Chi-square test examines whether rows and columns of a contingency table are statistically significantly associated.
+  #Chi-square test examines whether rows and columns of a contingency table 
+  #are statistically significantly associated.
     #Null hypothesis (H0): the row and the column variables of the contingency
     #                       table are independent.
     #Alternative hypothesis (H1):row and column variables are dependent
@@ -715,6 +716,7 @@ library(gridExtra)      # provides side-by-side plotting
 ##########################################################
 if (!"gridExtra" %in% rownames(installed.packages())) {install.packages("gridExtra")}
 head(midwest)
+names(midwest)
 datamid = midwest
 #x <- subset(midwest, select=percollege)
 head(midwest$percollege, 10)
@@ -737,16 +739,17 @@ library(dplyr)
 df = select(filter(midwest,state == "OH" | state == "MI"),state, percollege)
 ohdf = select(filter(midwest,state == "OH"),state, percollege)
 michidf = select(filter(midwest, state == "MI"),state, percollege)
-nrow(df1)
+nrow(ohdf)
 
-nrow(df2)
+nrow(michidf)
 nrow(df)
-options(max.print=1000)
+#options(max.print=1000)
 #?options
-print(df1)
-summary(df1)
-summary(df2)
+print(ohdf)
+summary(ohdf)
+summary(michidf)
 ggplot(df, aes(state, percollege)) + geom_boxplot()
+library(ggplot2)
 result  = t.test(ohdf$percollege,michidf$percollege)
 
 result  = t.test(percollege ~ state, data = df)
