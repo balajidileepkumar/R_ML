@@ -19,7 +19,7 @@ getmode <- function(v) {
 }
 
 # Create the vector with numbers.
-v <- c(2,1,2,3,3,1,2,3,4,1,5,5,3,2,3)
+v <- c(2,1,2,4,3,3,1,2,3,4,1,5,5,3,2,3)
 unique(v)
 #duplicated(v)
 uniqv <- unique(v)
@@ -113,6 +113,8 @@ show(relation)
 #anova(relation)
 print(relation)
 plot(relation)
+residuals(relation)
+fitted(relation)
 
 #########################################################
 #Multiple Linear Regression
@@ -181,7 +183,8 @@ am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = gaussian)
 #quasipoisson(link = "log"
 
 print(summary(am.data))
-#In statistics, deviance is a goodness-of-fit statistic for a statistical model; it is often used for statistical hypothesis testing.
+#In statistics, deviance is a goodness-of-fit statistic for a statistical model; 
+#it is often used for statistical hypothesis testing.
 
 #The null deviance shows how well the response is predicted by the model with 
 #nothing but an intercept.
@@ -261,6 +264,7 @@ airq <- subset(airquality, !is.na(Ozone))
 nrow(airq)
 
 airct1 <- ctree(Ozone ~ ., data = airq)
+airct1
 plot(airct1)
 
 airct2 <- ctree(Ozone ~ Temp + Wind + Day, data = airq)
@@ -271,9 +275,12 @@ a <- airq[1,2:6]
 print(a, typeof(a))
 predict(airct1, a)
 
-b <- airq[1:3,2:6]
+b <- airq[1:30,2:6]
 print(b, typeof(b))
 predict(airct1, b)
+
+
+c <- airq[11,2:6]
 
 newtestdata = list(Solar.R=as.integer(190), Wind=7.4,  Temp=as.integer(67), Month=as.integer(5), Day=as.integer(1))
 predict(airct1, newtestdata)
@@ -339,6 +346,8 @@ print(aggregate(Freq ~ Survived, data = dataset, sum))
 # Prints a table on frequency of survival
 print(aggregate(Freq ~ Age , data = dataset, sum))
 print(aggregate(Freq ~ Sex + Age , data = dataset, sum))
+print(aggregate(Freq ~ Sex + Age , data = dataset, sum))
+print(aggregate(Freq ~ Sex + Age + Survived , data = dataset, sum))
 
 # First we print the unpruned solution
 library(rpart.plot)
@@ -434,9 +443,9 @@ pred <- predict(svm_model1,a)
 pred
 #########################################################
 a["Sepal.Length"] = 5.2
-a["Sepal.Width" ] = 2.9
-a["Petal.Length"] = 3.9
-a["Petal.Width" ] = 1.7
+a["Sepal.Width" ] = 3.9
+a["Petal.Length"] = 4.9
+a["Petal.Width" ] = 2.7
 
 pred <- predict(svm_model1,a)
 pred
@@ -452,9 +461,11 @@ system.time(pred <- predict(svm_model1,x))
 #Predict Output
 
 #########################################################
-#The Naive Bayes named due to its extreme simplifications to the standard probability classifications
+#The Naive Bayes named due to its extreme simplifications to the standard 
+#probability classifications
 #It was formulated by Reverend Thomas Bayes
 #The Theorem was introducing the idea of conditionaly probability
+#P(A/B) = p(ANB)/p(B) given p(b)>0
 #P(A/B) = P(B/A)*P(A)/P(B)
 if (!"e1071" %in% rownames(installed.packages())) {install.packages("e1071")}
 library(e1071)
@@ -473,13 +484,23 @@ file_exists = file.exists("C:/Users/balaji.arumugham/Documents/R_ML/R_ML/breastc
 nrow(breast_cancer_data)
 ncol(breast_cancer_data)
 model <- naiveBayes(diagnosis ~ ., data = breast_cancer_data)
+names(breast_cancer_data)
+#target = as.factor(breast_cancer_data["diagnosis"])
+#levels(target)
 
-TestData <- breast_cancer_data[1,]
+TestData <- breast_cancer_data[1,c(1,3:33)]
+ncol(breast_cancer_data)
+typeof(breast_cancer_data)
+
+TestData <- select(breast_cancer_data,-"diagnosis")[1,]
 nrow(TestData)
 ncol(TestData)
 typeof(TestData)
 predict(model, TestData)
 names(TestData)
+pred <- predict(naive_model, TestData)
+predict(naive_model,TestData)
+
 #newtestdata = list(Solar.R=as.integer(190), Wind=7.4,  Temp=as.integer(67), Month=as.integer(5), Day=as.integer(1))
 ##################################################################################################################
 #boston house pricing
@@ -504,7 +525,7 @@ a <- Boston_matrix[1,c(7,11)]
 b <- Boston_matrix_1[1,c(7,11)]
 typeof(a)
 
-pred <- predict(naive_model,a)
+prediction <- predict(naive_model,a)
 predict(naive_model,b)
 #testdata = list(list(55,14),list(77,20))
 #a[1]=55
@@ -580,7 +601,8 @@ dimnames(mat) <- list(paste("Sample", 1:4), paste("Var", 1:5))
 #It is a decomposition technique, which is used to reduce the no of components
 myPCA <- prcomp(mat, scale. = T, center = F)
 myPCA$rotation # loadings
-
+names(Boston)
+head(Boston)
 myPCA <- prcomp(Boston, scale. = T, center = F)
 myPCA$rotation # loadings
 myPCA$x # scores
@@ -604,7 +626,8 @@ diag(sigma) <- mySVD$d
 D <- diag(mySVD$d)
 #dot.product(D,mySVD$u) 
 #no of columns on the left of operation should be equal to no of rows on right
-(mySVD$u)%*%(D)%*%(mySVD$v)
+uandv = (mySVD$u)%*%(D)
+uandv%*%(mySVD$v)
 
 mySVD # the diagonal of Sigma mySVD$d is given as a vector
 sigma <- matrix(0,4,4) # we have 4 PCs, no need for a 5th column
@@ -739,8 +762,8 @@ library(dplyr)
 df = select(filter(midwest,state == "OH" | state == "MI"),state, percollege)
 ohdf = select(filter(midwest,state == "OH"),state, percollege)
 michidf = select(filter(midwest, state == "MI"),state, percollege)
-nrow(ohdf)
 
+nrow(ohdf)
 nrow(michidf)
 nrow(df)
 #options(max.print=1000)
@@ -755,8 +778,8 @@ result  = t.test(ohdf$percollege,michidf$percollege)
 result  = t.test(percollege ~ state, data = df)
 result  = t.test(percollege ~ state, data = midwest)
 #Cross Verify
-mean(df1$percollege)
-mean(df2$percollege)
+mean(ohdf$percollege)
+mean(michidf$percollege)
 summary(result)
 ##########################################################
 result = t.test(iris$Petal.Length,iris$Petal.Width)
@@ -784,7 +807,8 @@ show(plant.mod1)
 #methods(plant.mod1)
 
 result = anova(plant.mod1)
-aov(weight ~ group,data = plant.df)
+result = aov(weight ~ group,data = plant.df)
+
 library(stats)
 residuals(plant.mod1)
 fitted(plant.mod1)
@@ -799,12 +823,13 @@ average_insects_died_eachspray = tapply(InsectSprays$count, InsectSprays$spray, 
 variance_insects_died = tapply(InsectSprays$count, InsectSprays$spray, var)
 boxplot(InsectSprays$count ~ InsectSprays$spray)
 #Test for Equal means
-oneway.test(InsectSprays$count~InsectSprays$spray)
+Oneway_Result = oneway.test(InsectSprays$count~InsectSprays$spray)
 #means are independent/here the sprays are independent
 
-aov.out = aov(count ~ spray, data=InsectSprays)
+result_aov = aov(count ~ spray, data=InsectSprays)
 
-anova(lm(count ~ spray, data=InsectSprays))
+result_anova = anova(lm(count ~ spray, data=InsectSprays))
+
 aov.out
 ##########################################################
 #Anova IRIs Single and Multiple
@@ -834,8 +859,9 @@ x10 <- c()
 k =10
 for ( i in 1:k) {
   TakenSample = sample(1:6,i*100, replace = TRUE)
-  print(length(TakenSample))
+  print(paste(length(TakenSample), "Mean : " , mean(TakenSample)))
   x10[i] = mean(TakenSample)}
+mean(x10)
    
 hist(x10, col ="pink", main="Sample size =10",xlab ="Outcome of die roll")
 abline(v = mean(x10), col = "Red")
